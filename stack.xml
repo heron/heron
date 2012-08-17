@@ -1,0 +1,9 @@
+<stack>
+  <description brief="kingfisher_apps">kingfisher_apps</description>
+  <author>Maintained by Mike Purvis</author>
+  <license></license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/kingfisher_apps</url>
+  <depend stack="ros" />
+
+</stack>

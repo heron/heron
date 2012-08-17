@@ -1,0 +1,14 @@
+<package>
+  <description brief="kingfisher_teleop">
+
+     kingfisher_teleop
+
+  </description>
+  <author>Ryan Gariepy</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/kingfisher_teleop</url>
+
+</package>
+
+
