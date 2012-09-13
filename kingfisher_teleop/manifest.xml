@@ -8,6 +8,10 @@
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/kingfisher_teleop</url>
+  <depend package="rospy"/>
+  <depend package="joy"/>
+  <depend package="sensor_msgs"/>
+  <depend package="geometry_msgs"/>
 
 </package>
 
