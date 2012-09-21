@@ -12,6 +12,7 @@
   <depend package="joy"/>
   <depend package="geometry_msgs"/>
   <depend package="topic_tools"/>
+  <depend package="sensor_msgs"/>
 </package>
 
 
