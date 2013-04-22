@@ -18,6 +18,11 @@ class Teleop:
         self.deadman_button = rospy.get_param('~deadman_button', 0)
         self.turbo_button = rospy.get_param('~turbo_button', 1)
 
+        self.max_age = None
+        max_age_seconds = rospy.get_param('~max_age_seconds', None)
+        if max_age_seconds:
+            self.max_age = rospy.Duration.from_sec(max_age_seconds)
+
         self.cmd_pub = rospy.Publisher('cmd_vel', Twist)
 
         rospy.Subscriber("joy", Joy, self.callback)
@@ -25,6 +30,11 @@ class Teleop:
     
     def callback(self, data):
         """ Receive joystick data, formulate Twist message. """
+        #print (data.header.stamp - rospy.Time.now()).to_sec() 
+        if self.max_age and data.header.stamp - rospy.Time.now() > self.max_age:
+            # Joystick messages are too delayed. Discard them.
+            return
+
         scale = 0
         if data.buttons[self.deadman_button] == 1:
             scale = self.drive_scale
