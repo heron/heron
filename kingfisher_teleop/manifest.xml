@@ -11,8 +11,10 @@
   <depend package="rospy"/>
   <depend package="joy"/>
   <depend package="geometry_msgs"/>
+  <depend package="kingfisher_msgs"/>
   <depend package="topic_tools"/>
   <depend package="sensor_msgs"/>
+  <depend package="tf"/>
 </package>
 
 
