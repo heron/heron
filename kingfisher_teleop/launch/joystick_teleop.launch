@@ -11,7 +11,7 @@
     <param name="coalesce_interval" value="0.02" />
   </node>
 
-  <node pkg="kingfisher_teleop" type="joystick_teleop.py" name="joystick_teleop">
+  <node pkg="kingfisher_teleop" type="joystick_teleop" name="joystick_teleop">
     <param name="turn_scale" value="$(arg turn_scale)" />
     <param name="drive_scale" value="$(arg drive_scale)" />
     <remap from="cmd_vel" to="$(arg cmd_topic)" />
