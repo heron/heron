@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package>
-  <name>kingfisher_teleop_c</name>
+  <name>kingfisher_teleop</name>
   <version>0.0.0</version>
   <description>The kingfisher_teleop package</description>
 

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(kingfisher_teleop_c)
+project(kingfisher_teleop)
 
 find_package(catkin REQUIRED)
 
