@@ -1,3 +1,6 @@
+# General MCU status for Kingfisher transmitted from the MCU
+# to higher-level software on the /sense topic.
+
 # Voltage level of battery, in volts
 float32 battery
 
