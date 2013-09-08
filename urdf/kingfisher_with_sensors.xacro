@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+
+<robot name="kingfisher"
+    xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+    xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+    xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface">
+
+    <!-- Included URDF Files -->
+    <include filename="$(find kingfisher_description)/urdf/kingfisher_base.urdf.xacro" />	
+
+    <!-- Set up gps configuration -->
+    <gazebo>
+        <controller:kingfisher_gps_plugin name="kingfisher_gps" plugin="libkingfisher_ros_gps.so">
+            <alwaysOn>true</alwaysOn>
+            <updateRate>4.0</updateRate>
+            <bodyName>base_link</bodyName>
+            <topicName>fix</topicName>
+            <velocityTopicName>fix_velocity</velocityTopicName>
+            <drift>5.0 5.0 5.0</drift>
+            <gaussianNoise>0.1 0.1 0.1</gaussianNoise>
+            <velocityDrift>0 0 0</velocityDrift>
+            <velocityGaussianNoise>0.1 0.1 0.1</velocityGaussianNoise>
+        </controller:kingfisher_gps_plugin>
+    </gazebo>
+
+    <!-- Set up imu configuration -->
+    <gazebo>
+        <controller:kingfisher_imu_plugin name="kingfisher_imu" plugin="libkingfisher_ros_imu.so">
+            <updateRate>100.0</updateRate>
+            <bodyName>base_link</bodyName>
+            <topicName>raw_imu</topicName>
+            <rpyOffsets>0 0 0</rpyOffsets> <!-- deprecated -->
+            <gaussianNoise>0</gaussianNoise> <!-- deprecated -->
+            <accelDrift>0.5 0.5 0.5</accelDrift>
+            <accelGaussianNoise>0.35 0.35 0.3</accelGaussianNoise>
+            <rateDrift>0.1 0.1 0.1</rateDrift>
+            <rateGaussianNoise>0.05 0.05 0.015</rateGaussianNoise>
+            <headingDrift>0.1</headingDrift>
+            <headingGaussianNoise>0.05</headingGaussianNoise>
+        </controller:kingfisher_imu_plugin>
+    </gazebo>
+
+    <!-- Set up camera linkage and configuration -->
+    <joint name="base_link_camera_link_joint" type="fixed">
+		<origin xyz="0 0 0.2" rpy="0 0 0" />
+        <parent link="base_link"/>
+        <child link="camera_link" />
+    </joint>
+
+
+    <link name="camera_link">
+        <inertial>
+            <mass value="1"/>
+            <origin xyz="0 0 0"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+    </link>
+
+    <gazebo reference="camera_link">
+        <sensor:camera name="camera_sensor">
+            <imageSize>640 480</imageSize>
+            <imageFormat>BAYER_BGGR8</imageFormat>
+            <hfov>90</hfov>
+            <nearClip>0.1</nearClip>
+            <farClip>100</farClip>
+            <updateRate>25.0</updateRate>
+            <controller:gazebo_ros_camera name="camera_controller" plugin="libkingfisher_ros_prosilica.so">
+                <alwaysOn>true</alwaysOn>
+                <updateRate>25.0</updateRate>
+                <cameraName>camera</cameraName>
+                <imageTopicName>image_raw</imageTopicName>
+                <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+                <frameName>camera_link</frameName>
+                <CxPrime>320.5</CxPrime>
+                <Cx>320.5</Cx>
+                <Cy>240.5</Cy>
+                <!-- image_width / (2*tan(hfov_radian /2)) -->
+                <!-- 320 for wide and 772.55 for narrow stereo camera -->
+                <focal_length>320</focal_length>
+                <distortion_k1>0.0</distortion_k1>
+                <distortion_k2>0.0</distortion_k2>
+                <distortion_k3>0.0</distortion_k3>
+                <distortion_t1>0.0</distortion_t1>
+                <distortion_t2>0.0</distortion_t2>
+            </controller:gazebo_ros_camera>
+        </sensor:camera>
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+
+    <!-- Set up sonar linkage and configuration -->
+    <joint name="base_link_sonar_link_joint" type="fixed">
+		<origin xyz="0 0 -0.2" rpy="0 1.57 0" />
+        <parent link="base_link"/>
+        <child link="sonar_link" />
+    </joint>
+
+    <link name="sonar_link">
+        <inertial>
+            <mass value="1"/>
+            <origin xyz="0 0 0"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+    </link>
+
+    <gazebo reference="sonar_link">
+      <sensor:ray name="sonar_sensor">
+        <rayCount>5</rayCount>
+        <rangeCount>5</rangeCount>
+        <verticalRayCount>5</verticalRayCount>
+        <verticalRangeCount>5</verticalRangeCount>
+
+        <minAngle>-${5/2}</minAngle>
+        <verticalMinAngle>-${5/2}</verticalMinAngle>
+        <maxAngle>${5/2}</maxAngle>
+        <verticalMaxAngle>${5/2}</verticalMaxAngle>
+
+        <minRange>0</minRange>
+        <maxRange>30</maxRange>
+        <resRange>0.01</resRange>
+
+        <updateRate>20</updateRate>
+
+        <controller:hector_gazebo_ros_sonar name="gazebo_ros_sonar_controller" plugin="libkingfisher_ros_sonar.so">
+            <gaussianNoise>0.005</gaussianNoise>
+            <topicName>sonar</topicName>
+            <frameId>sonar_link</frameId>
+            <offset>0</offset>
+            <drift>0</drift>
+            <driftFrequency>0</driftFrequency>
+        </controller:hector_gazebo_ros_sonar>
+      </sensor:ray>
+    </gazebo>
+
+    
+</robot>
+
