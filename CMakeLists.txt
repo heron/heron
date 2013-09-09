@@ -8,6 +8,8 @@ add_message_files(
   FILES
   Sense.msg
   Drive.msg
+  Course.msg
+  Helm.msg
 )
 
 ## Generate services in the 'srv' folder
