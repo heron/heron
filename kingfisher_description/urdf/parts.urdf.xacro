@@ -71,7 +71,7 @@ incorporate collision.
 			<visual>
 				<origin xyz="0 0 0" rpy="0 0 0" />
 				<geometry>
-					<mesh filename="package://kingfisher_description/mesh/${mesh}.stl" />
+					<mesh filename="package://kingfisher_description/meshes/${mesh}.stl" />
 				</geometry>
 			</visual>
 			<collision>

@@ -44,11 +44,41 @@ This program contains the description of the robot base model for the Clearpath 
     xmlns:xacro="http://ros.org/wiki/xacro" name="kingfisher">
 
 	<!-- Included URDF/XACRO Files -->
-    <kingfisher_include filename="$(find kingfisher_description)/urdf/parts.urdf.xacro" />
+    <include filename="$(find kingfisher_description)/urdf/parts.urdf.xacro" />
        
     <!-- PROPERTY LIST -->
     <!--All units in m-kg-s-radians unit system -->
     <property name="M_PI" value="3.1415926535897931" />
+
+    <!-- BASE-FOOTPRINT -->
+    <!-- base_footprint is a fictitious link(frame) that is on the ground right below base_link origin, navigation stack depends on this frame -->
+    <link name="base_footprint">
+        <inertial>
+            <mass value="0.0001" />
+            <origin xyz="0 0 0" />
+            <inertia ixx="0.0001" ixy="0.0" ixz="0.0"
+                iyy="0.0001" iyz="0.0" 
+                izz="0.0001" />
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+    </link>
+
+    <gazebo reference="base_footprint">
+        <turnGravityOff>false</turnGravityOff>
+    </gazebo>
+
+    <joint name="base_footprint_joint" type="fixed">
+		<origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="base_footprint"/>
+        <child link="base_link" />
+    </joint>
+
 
     <!-- BASE-LINK -->
     <!--Actual body/chassis of the robot-->
@@ -64,7 +94,7 @@ This program contains the description of the robot base model for the Clearpath 
         <visual>
             <origin xyz="0 0 0" rpy="${M_PI/2} 0 ${M_PI/2}" />
             <geometry>
-                <mesh filename="package://kingfisher_description/mesh/kingfisher_base.stl" />
+                <mesh filename="package://kingfisher_description/meshes/kingfisher_base.stl" />
             </geometry>
         </visual>
     
@@ -82,23 +112,23 @@ This program contains the description of the robot base model for the Clearpath 
 
     <!-- PANEL-LINKS -->
     <!-- Top Plate -->
-    <kingfisher_part parent="base_link" name="left_panel" mesh="left_panel" 
+    <kingfisher_part parent="base_footprint" name="left_panel" mesh="left_panel" 
           translateX="0.0" translateY="-0.35" translateZ="0.05" 
           rotateX="${M_PI/2}" rotateY="0.0" rotateZ="${M_PI/2}"/>
-    <gazebo reference="base_link_left_panel_part">
+    <gazebo reference="base_footprint_left_panel_part">
         <material>Gazebo/Yellow</material>
     </gazebo>
 
-    <kingfisher_part parent="base_link" name="right_panel" mesh="right_panel" 
+    <kingfisher_part parent="base_footprint" name="right_panel" mesh="right_panel" 
           translateX="0.0" translateY="0.35" translateZ="0.05" 
           rotateX="${M_PI/2}" rotateY="0.0" rotateZ="${-M_PI/2}"/>
-    <gazebo reference="base_link_right_panel_part">
+    <gazebo reference="base_footprint_right_panel_part">
         <material>Gazebo/Yellow</material>
     </gazebo>
 
     <!--Gazebo Plugin for simulating Kingfisher dynamics-->
     <gazebo>
-        <controller:kingfisher_plugin name="kingfisher_dynamic" plugin="libkingfisher_gazebo_plugins.so">
+	    <plugin name="kingfisher_dynamic" filename="libkingfisher_gazebo_plugins.so">
             <maxForce>62.0</maxForce>
             <bodyName>base_link</bodyName>
             <waterDensity>997.7735</waterDensity>
@@ -106,7 +136,7 @@ This program contains the description of the robot base model for the Clearpath 
             <xyzDampingFactor>20.0</xyzDampingFactor>
             <yawDampingFactor>20.0</yawDampingFactor>
             <rolPitDampingFactor>5.0</rolPitDampingFactor>
-        </controller:kingfisher_plugin>
+        </plugin>
     </gazebo>
         
 </robot>
