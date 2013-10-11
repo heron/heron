@@ -44,7 +44,7 @@ This program contains the description of the robot base model for the Clearpath 
     xmlns:xacro="http://ros.org/wiki/xacro" name="kingfisher">
 
 	<!-- Included URDF/XACRO Files -->
-    <include filename="$(find kingfisher_description)/urdf/parts.urdf.xacro" />
+    <kingfisher_include filename="$(find kingfisher_description)/urdf/parts.urdf.xacro" />
        
     <!-- PROPERTY LIST -->
     <!--All units in m-kg-s-radians unit system -->

@@ -6,7 +6,7 @@
     xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface">
 
     <!-- Included URDF Files -->
-    <include filename="$(find kingfisher_description)/urdf/base.urdf.xacro" />	
+    <kingfisher_include filename="$(find kingfisher_description)/urdf/base.urdf.xacro" />	
 
     <!-- Set up gps configuration -->
     <gazebo>
