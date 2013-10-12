@@ -53,7 +53,7 @@ incorporate collision.
 	<property name="iyz_com_cs" value="0.00" /> <!-- at center of mass aligned with coordinate system, kg*m^2-->
 	<property name="izz_com_cs" value="0.01" /> <!-- at center of mass aligned with coordinate system, kg*m^2-->
 	
-	<xacro:macro name="kingfisher_part" params="parent name mesh translateX translateY translateZ rotateX rotateY rotateZ">
+	<xacro:macro name="kingfisher_part" params="parent name mesh translateX translateY translateZ rotateX rotateY rotateZ color">
 		<joint name="${parent}_${name}_joint" type="fixed">
 		    <origin xyz="${translateX} ${translateY} ${translateZ}" 
 		            rpy="${rotateX} ${rotateY} ${rotateZ}" />
@@ -73,6 +73,7 @@ incorporate collision.
 				<geometry>
 					<mesh filename="package://kingfisher_description/meshes/${mesh}.stl" />
 				</geometry>
+        <material name="${color}" />
 			</visual>
 			<collision>
 				<origin xyz="0 0 0" rpy="0 0 0"/>

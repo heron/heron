@@ -43,8 +43,9 @@ This program contains the description of the robot base model for the Clearpath 
     xmlns:physics="http://playerstage.sourceforge.net/gazebo/xmlschema/#physics"
     xmlns:xacro="http://ros.org/wiki/xacro" name="kingfisher">
 
-	<!-- Included URDF/XACRO Files -->
-    <include filename="$(find kingfisher_description)/urdf/parts.urdf.xacro" />
+    <!-- Included URDF/XACRO Files -->
+    <xacro:include filename="$(find kingfisher_description)/urdf/materials.urdf.xacro" />
+    <xacro:include filename="$(find kingfisher_description)/urdf/parts.urdf.xacro" />
        
     <!-- PROPERTY LIST -->
     <!--All units in m-kg-s-radians unit system -->
@@ -74,7 +75,7 @@ This program contains the description of the robot base model for the Clearpath 
     </gazebo>
 
     <joint name="base_footprint_joint" type="fixed">
-		<origin xyz="0 0 0" rpy="0 0 0" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
         <parent link="base_footprint"/>
         <child link="base_link" />
     </joint>
@@ -96,11 +97,12 @@ This program contains the description of the robot base model for the Clearpath 
             <geometry>
                 <mesh filename="package://kingfisher_description/meshes/kingfisher_base.stl" />
             </geometry>
+            <material name="DarkGray" />
         </visual>
     
         <collision>
-	        <origin xyz="0 0 0" rpy="0 0 0" />
-	        <geometry>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
                 <box size = "0.1 0.1 0.1"/> <!--making it slightly bigger in x and z direction-->
             </geometry>
         </collision>     
@@ -114,21 +116,23 @@ This program contains the description of the robot base model for the Clearpath 
     <!-- Top Plate -->
     <kingfisher_part parent="base_footprint" name="left_panel" mesh="left_panel" 
           translateX="0.0" translateY="-0.35" translateZ="0.05" 
-          rotateX="${M_PI/2}" rotateY="0.0" rotateZ="${M_PI/2}"/>
+          rotateX="${M_PI/2}" rotateY="0.0" rotateZ="${M_PI/2}"
+          color="Yellow" />
     <gazebo reference="base_footprint_left_panel_part">
         <material>Gazebo/Yellow</material>
     </gazebo>
 
     <kingfisher_part parent="base_footprint" name="right_panel" mesh="right_panel" 
           translateX="0.0" translateY="0.35" translateZ="0.05" 
-          rotateX="${M_PI/2}" rotateY="0.0" rotateZ="${-M_PI/2}"/>
+          rotateX="${M_PI/2}" rotateY="0.0" rotateZ="${-M_PI/2}"
+          color="Yellow" />
     <gazebo reference="base_footprint_right_panel_part">
         <material>Gazebo/Yellow</material>
     </gazebo>
 
     <!--Gazebo Plugin for simulating Kingfisher dynamics-->
     <gazebo>
-	    <plugin name="kingfisher_dynamic" filename="libkingfisher_gazebo_plugins.so">
+      <plugin name="kingfisher_dynamic" filename="libkingfisher_gazebo_plugins.so">
             <maxForce>62.0</maxForce>
             <bodyName>base_link</bodyName>
             <waterDensity>997.7735</waterDensity>
