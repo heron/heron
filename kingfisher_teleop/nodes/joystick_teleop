@@ -3,9 +3,9 @@
 import roslib; roslib.load_manifest('kingfisher_teleop')
 import rospy
 
-from sensor_msgs.msg import Joy,Imu
-from geometry_msgs.msg import Twist,Wrench
-from kingfisher_msgs.msg import YawSpd, Helm
+from sensor_msgs.msg import Joy, Imu
+from geometry_msgs.msg import Twist, Wrench
+from kingfisher_msgs.msg import Course, Helm
 from tf.transformations import euler_from_quaternion
 
 
@@ -41,12 +41,12 @@ class Teleop:
             self.max_age = rospy.Duration.from_sec(max_age_seconds)
 
         self.helm_pub = rospy.Publisher('cmd_helm', Helm)
-        self.wrench_pub = rospy.Publisher('cmd_wrench',Wrench)
-        self.heading_pub = rospy.Publisher('cmd_yawspd',YawSpd)
+        self.wrench_pub = rospy.Publisher('cmd_wrench', Wrench)
+        self.heading_pub = rospy.Publisher('cmd_course', Course)
 
 
         rospy.Subscriber("joy", Joy, self.callback)
-        rospy.Subscriber("imu/data_final",Imu,self.imu_callback) 
+        rospy.Subscriber("imu/data_compass", Imu, self.imu_callback) 
         rospy.spin()
    
     def output_mode(self):
@@ -92,7 +92,7 @@ class Teleop:
                 else:
                     scale = self.bck_vel_scale
                 cmd=YawSpd()
-                cmd.heading = self.hold_heading
+                cmd.yaw = self.hold_heading
                 cmd.speed = data.axes[1] * scale
                 self.heading_pub.publish(cmd)
 
@@ -108,7 +108,7 @@ class Teleop:
                 scale = 1
                 cmd = Helm()
                 cmd.yaw_rate = data.axes[0] * self.rotation_scale 
-                cmd.thrust_pct = data.axes[1] * scale
+                cmd.thrust = data.axes[1] * scale
                 self.helm_pub.publish(cmd)
         else: # command open loop thrusters on a wrench message
             scale = 0
