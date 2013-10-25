@@ -2,8 +2,8 @@
 Changelog for package kingfisher_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.3 (2013-10-24)
+------------------
 * Fix weird build bug by properly depending on message_runtime.
 * Remove commented-out service generation clause.
 

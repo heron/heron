@@ -2,8 +2,8 @@
 Changelog for package kingfisher_teleop
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.3 (2013-10-24)
+------------------
 * Fix up joystick teleoperation to use new messages.
 
 0.0.2 (2013-10-15)
