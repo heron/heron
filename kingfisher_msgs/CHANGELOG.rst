@@ -2,9 +2,6 @@
 Changelog for package kingfisher_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-0.0.4 (2014-03-05)
-------------------
-
 0.0.3 (2013-10-24)
 ------------------
 * Fix weird build bug by properly depending on message_runtime.
