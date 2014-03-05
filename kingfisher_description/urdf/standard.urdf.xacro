@@ -15,7 +15,7 @@
         <plugin name="kingfisher_imu" filename="libgazebo_ros_imu.so">
             <updateRate>100.0</updateRate>
             <bodyName>base_link</bodyName>
-            <topicName>raw_imu</topicName>
+            <topicName>imu/data</topicName>
             <rpyOffsets>0 0 0</rpyOffsets> <!-- deprecated -->
             <gaussianNoise>0</gaussianNoise> <!-- deprecated -->
             <accelDrift>0.5 0.5 0.5</accelDrift>
@@ -24,6 +24,21 @@
             <rateGaussianNoise>0.05 0.05 0.015</rateGaussianNoise>
             <headingDrift>0.1</headingDrift>
             <headingGaussianNoise>0.05</headingGaussianNoise>
+        </plugin>
+    </gazebo>
+
+    <!-- Set up gps configuration -->
+    <gazebo>
+        <plugin name="kingfisher_gps" filename="libkingfisher_ros_gps.so">
+            <alwaysOn>true</alwaysOn>
+            <updateRate>4.0</updateRate>
+            <bodyName>base_link</bodyName>
+            <topicName>navsat/fix</topicName>
+            <velocityTopicName>navsat/fix_velocity</velocityTopicName>
+            <drift>5.0 5.0 5.0</drift>
+            <gaussianNoise>0.1 0.1 0.1</gaussianNoise>
+            <velocityDrift>0 0 0</velocityDrift>
+            <velocityGaussianNoise>0.1 0.1 0.1</velocityGaussianNoise>
         </plugin>
     </gazebo>
 
