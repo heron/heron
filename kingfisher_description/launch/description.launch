@@ -1,15 +1,9 @@
 <?xml version="1.0"?>
 <launch>
-  <arg name="with_sonar" default="$(optenv KF_SIM_WITH_SONAR true)" />
+  <arg name="with_sonar" default="$(optenv KF_SIM_WITH_SONAR false)" />
 
   <!-- Send the Kingfisher Robot URDF/XACRO to param server -->
-  <group if="$(arg with_sonar)">
-    <param name="robot_description" command="$(find xacro)/xacro '$(find kingfisher_description)/urdf/standard_with_sonar.xacro'" />
-  </group>
-
-  <group unless="$(arg with_sonar)">
-    <param name="robot_description" command="$(find xacro)/xacro '$(find kingfisher_description)/urdf/standard.urdf.xacro'" />
-  </group>
+  <param name="robot_description" command="$(find xacro)/xacro '$(find kingfisher_description)/urdf/standard.urdf.xacro' sonar_enabled:=$(arg with_sonar)" />
 
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
 </launch>
