@@ -14,16 +14,28 @@ class Teleop:
         rospy.init_node('clearpath_teleop')
 
         self.rotation_scale = rospy.get_param('~rotation_scale',0.5) #rad/s
-        self.fwd_vel_scale = rospy.get_param('~fwd_vel_scale', 5) #m/s
-        self.bck_vel_scale = rospy.get_param('~bck_vel_scale',0.5) #m/s
+
+        bck_force_scale = rospy.get_param('~bck_force_scale', 40) #Newtons
+        self.button_scales = {
+            "deadman": {
+                "fwd_vel": rospy.get_param('~fwd_vel_scale', 5), #m/s
+                "bck_vel": rospy.get_param('~bck_vel_scale', 0.5), #m/s
+                "fwd_force": rospy.get_param('~fwd_force_scale', 75), #Newtons
+                "bck_force": bck_force_scale
+            },
+            "turbo": {
+                "fwd_vel": rospy.get_param('~tb_fwd_vel_scale', 2.5), #m/s
+                "bck_vel": rospy.get_param('~tb_bck_vel_scale', 0.5), #m/s
+                "fwd_force": rospy.get_param('~tb_fwd_force_scale', 75), #Newtons
+                "bck_force": rospy.get_param('~tb_bck_force_scale', 40) #Newtons
+            }
+        }
 
         self.boat_width = 0.381
-        self.fwd_force_scale = rospy.get_param('~fwd_force_scale',75) #Newtons
-        self.bck_force_scale = rospy.get_param('~bck_force_scale',40) #Newtons
-        self.torque_scale = rospy.get_param('~torque_scale',self.bck_force_scale*2*self.boat_width) #N.m, max torque depends on max reverse thrust possible
+        self.torque_scale = rospy.get_param('~torque_scale', bck_force_scale * 2 * self.boat_width) #N.m, max torque depends on max reverse thrust possible
          
         self.deadman_button = rospy.get_param('~deadman_button', 0)
-        #self.turbo_button = rospy.get_param('~turbo_button', 1)
+        self.turbo_button = rospy.get_param('~turbo_button', 1)
         self.heading_hold_button = rospy.get_param('~heading_hold_button',3)
         self.autonomous_button = rospy.get_param('~autonomous_button',2)
 
@@ -84,39 +96,27 @@ class Teleop:
         self.last_auto_button = auto_button
         self.last_heading_button = heading_button
 
-        if (self.heading_hold):
-            scale = 0
-            if data.buttons[self.deadman_button] == 1:
-                if (data.axes[1] >= 0):
-                    scale = self.fwd_vel_scale 
-                else:
-                    scale = self.bck_vel_scale
-                cmd=YawSpd()
+
+        if data.buttons[self.deadman_button] == 1 or data.buttons[self.turbo_button] == 1:
+
+            scales = self.button_scales["turbo"] if data.buttons[self.turbo_button] == 1 else self.button_scales["deadman"]
+            if data.axes[1] >= 0: #forward
+                scale = scales["fwd_vel"] if self.heading_hold else scales["fwd_force"]
+            else:
+                scale = scales["bck_vel"] if self.heading_hold else scales["bck_force"]
+
+            if self.heading_hold:
+                cmd = YawSpd()
                 cmd.yaw = self.hold_heading
                 cmd.speed = data.axes[1] * scale
                 self.heading_pub.publish(cmd)
-
-
-
-        elif (self.autonomous): #command closed loop yaw rate + thrust pct on helm message
-            if data.buttons[self.deadman_button] == 1:
-                #if (data.axes[1] >= 0):
-                #    scale = self.fwd_vel_scale 
-                #else:
-                #    scale = self.bck_vel_scale
-                
+            elif self.autonomous: #command closed loop yaw rate + thrust pct on helm message
                 scale = 1
                 cmd = Helm()
                 cmd.yaw_rate = data.axes[0] * self.rotation_scale 
                 cmd.thrust = data.axes[1] * scale
                 self.helm_pub.publish(cmd)
-        else: # command open loop thrusters on a wrench message
-            scale = 0
-            if data.buttons[self.deadman_button] == 1:
-                if (data.axes[1] >= 0):
-                    scale = self.fwd_force_scale 
-                else:
-                    scale = self.bck_force_scale
+            else: # command open loop thrusters on a wrench message
                 cmd = Wrench()
                 cmd.torque.z = data.axes[0] * self.torque_scale
                 cmd.force.x = data.axes[1]  * scale
