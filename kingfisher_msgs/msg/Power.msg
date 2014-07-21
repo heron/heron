@@ -1,6 +1,6 @@
 # Specific power-system data, transmitted by the MCU at 1Hz on /power topic.
 
-uint32_t uptime  # seconds
+duration uptime  # seconds
 
 float32 user_power  # watts
 
