@@ -3,8 +3,8 @@ Changelog for package kingfisher_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-Forthcoming
------------
+0.1.0 (2014-12-02)
+------------------
 * Add roslaunch file check to kingfisher_description.
 * Contributors: Mike Purvis
 
