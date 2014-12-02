@@ -2,6 +2,11 @@
 Changelog for package kingfisher_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Adding a new Power message, to represent charge state info from MCU.
+* Contributors: Mike Purvis
+
 0.0.4 (2014-03-05)
 ------------------
 
