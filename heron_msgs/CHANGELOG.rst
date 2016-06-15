@@ -1,5 +1,5 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Changelog for package kingfisher_msgs
+Changelog for package heron_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 0.1.0 (2014-12-02)
@@ -23,4 +23,4 @@ Changelog for package kingfisher_msgs
 ------------------
 * Add Course and Helm messages for higher level control.
 * Rename fields, improve message documentation.
-* Files from old kingfisher repo.
+* Files from old heron repo.

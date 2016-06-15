@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 
-<robot name="kingfisher"
+<robot name="heron"
     xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
     xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
     xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
     xmlns:xacro="http://ros.org/wiki/xacro">
 
     <!-- Included URDF Files -->
-    <xacro:include filename="$(find kingfisher_description)/urdf/base.urdf.xacro" />	
+    <xacro:include filename="$(find heron_description)/urdf/base.urdf.xacro" />	
 
     <!-- Set up imu configuration -->
     <gazebo>
-        <plugin name="kingfisher_imu" filename="libgazebo_ros_imu.so">
+        <plugin name="heron_imu" filename="libgazebo_ros_imu.so">
             <updateRate>20.0</updateRate>
             <bodyName>base_link</bodyName>
             <topicName>imu/data</topicName>
@@ -28,7 +28,7 @@
 
     <!-- Set up gps configuration -->
     <gazebo>
-        <plugin name="kingfisher_gps" filename="libkingfisher_ros_gps.so">
+        <plugin name="heron_gps" filename="libheron_ros_gps.so">
             <alwaysOn>true</alwaysOn>
             <updateRate>10.0</updateRate>
             <bodyName>base_link</bodyName>
@@ -62,7 +62,7 @@
     <gazebo reference="camera_link">
         <sensor type="camera" name="camera">
             <update_rate>30.0</update_rate>
-            <camera name="kingfisher_camera">
+            <camera name="heron_camera">
                 <horizontal_fov>1.3962634</horizontal_fov>
                 <image>
                     <width>640</width>
@@ -85,7 +85,7 @@
             <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
                 <alwaysOn>true</alwaysOn>
                 <updateRate>30.0</updateRate>
-                <cameraName>kingfisher/camera</cameraName>
+                <cameraName>heron/camera</cameraName>
                 <imageTopicName>image_raw</imageTopicName>
                 <cameraInfoTopicName>camera_info</cameraInfoTopicName>
                 <frameName>camera_link</frameName>
@@ -145,7 +145,7 @@
                     </noise>
                 </ray>
 
-                <plugin name="kingfisher_ros_sonar_controller" filename="libkingfisher_ros_sonar.so">
+                <plugin name="heron_ros_sonar_controller" filename="libheron_ros_sonar.so">
                     <gaussianNoise>0.005</gaussianNoise>
                     <topicName>sonar</topicName>
                     <frameId>sonar_link</frameId>

@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package>
-  <name>kingfisher_description</name>
+  <name>heron_description</name>
   <version>0.1.0</version>
-  <description>URDF description for Kingfisher</description>
+  <description>URDF description for Heron</description>
 
   <maintainer email="mpurvis@clearpathrobotics.com">Mike Purvis</maintainer>
   <author email="yanma@clearpathrobotics.com">Yan Ma</author>

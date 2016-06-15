@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(kingfisher_msgs)
+project(heron_msgs)
 
 find_package(catkin REQUIRED message_generation)
 

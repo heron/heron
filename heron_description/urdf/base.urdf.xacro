@@ -25,7 +25,7 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-This program contains the description of the robot base model for the Clearpath Kingfisher
+This program contains the description of the robot base model for the Clearpath Heron
 -->
 
 <robot 
@@ -41,11 +41,11 @@ This program contains the description of the robot base model for the Clearpath 
     xmlns:rendering="http://playerstage.sourceforge.net/gazebo/xmlschema/#rendering"
     xmlns:renderable="http://playerstage.sourceforge.net/gazebo/xmlschema/#renderable"
     xmlns:physics="http://playerstage.sourceforge.net/gazebo/xmlschema/#physics"
-    xmlns:xacro="http://ros.org/wiki/xacro" name="kingfisher">
+    xmlns:xacro="http://ros.org/wiki/xacro" name="heron">
 
     <!-- Included URDF/XACRO Files -->
-    <xacro:include filename="$(find kingfisher_description)/urdf/materials.urdf.xacro" />
-    <xacro:include filename="$(find kingfisher_description)/urdf/parts.urdf.xacro" />
+    <xacro:include filename="$(find heron_description)/urdf/materials.urdf.xacro" />
+    <xacro:include filename="$(find heron_description)/urdf/parts.urdf.xacro" />
        
     <!-- PROPERTY LIST -->
     <!--All units in m-kg-s-radians unit system -->
@@ -95,7 +95,7 @@ This program contains the description of the robot base model for the Clearpath 
         <visual>
             <origin xyz="0 0 0" rpy="${M_PI/2} 0 ${M_PI/2}" />
             <geometry>
-                <mesh filename="package://kingfisher_description/meshes/kingfisher_base.stl" />
+                <mesh filename="package://heron_description/meshes/heron_base.stl" />
             </geometry>
             <material name="DarkGray" />
         </visual>
@@ -114,7 +114,7 @@ This program contains the description of the robot base model for the Clearpath 
 
     <!-- PANEL-LINKS -->
     <!-- Top Plate -->
-    <kingfisher_part parent="base_footprint" name="left_panel" mesh="left_panel" 
+    <heron_part parent="base_footprint" name="left_panel" mesh="left_panel" 
           translateX="0.0" translateY="-0.35" translateZ="0.05" 
           rotateX="${M_PI/2}" rotateY="0.0" rotateZ="${M_PI/2}"
           color="Yellow" />
@@ -122,7 +122,7 @@ This program contains the description of the robot base model for the Clearpath 
         <material>Gazebo/Yellow</material>
     </gazebo>
 
-    <kingfisher_part parent="base_footprint" name="right_panel" mesh="right_panel" 
+    <heron_part parent="base_footprint" name="right_panel" mesh="right_panel" 
           translateX="0.0" translateY="0.35" translateZ="0.05" 
           rotateX="${M_PI/2}" rotateY="0.0" rotateZ="${-M_PI/2}"
           color="Yellow" />
@@ -130,9 +130,9 @@ This program contains the description of the robot base model for the Clearpath 
         <material>Gazebo/Yellow</material>
     </gazebo>
 
-    <!--Gazebo Plugin for simulating Kingfisher dynamics-->
+    <!--Gazebo Plugin for simulating Heron dynamics-->
     <gazebo>
-      <plugin name="kingfisher_dynamic" filename="libkingfisher_gazebo_plugins.so">
+      <plugin name="heron_dynamic" filename="libheron_gazebo_plugins.so">
             <maxForce>62.0</maxForce>
             <bodyName>base_link</bodyName>
             <waterDensity>997.7735</waterDensity>

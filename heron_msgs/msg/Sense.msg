@@ -1,4 +1,4 @@
-# General MCU status for Kingfisher transmitted from the MCU
+# General MCU status for Heron transmitted from the MCU
 # to higher-level software on the /sense topic.
 
 # Voltage level of battery, in volts
