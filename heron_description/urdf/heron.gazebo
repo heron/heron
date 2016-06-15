@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<robot>
+
+  <!--Gazebo Plugin for simulating Heron dynamics-->
+  <gazebo>
+    <plugin name="heron_dynamic" filename="libheron_gazebo_plugins.so">
+          <maxForce>62.0</maxForce>
+          <bodyName>base_link</bodyName>
+          <waterDensity>997.7735</waterDensity>
+          <waterLevel>1</waterLevel>
+          <xyzDampingFactor>20.0</xyzDampingFactor>
+          <yawDampingFactor>20.0</yawDampingFactor>
+          <rolPitDampingFactor>5.0</rolPitDampingFactor>
+      </plugin>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
+      <robotNamespace>/</robotNamespace>
+      <updateRate>50.0</updateRate>
+      <bodyName>imu_link</bodyName>
+      <topicName>imu/data</topicName>
+      <accelDrift>0.005 0.005 0.005</accelDrift>
+      <accelGaussianNoise>0.005 0.005 0.005</accelGaussianNoise>
+      <rateDrift>0.005 0.005 0.005 </rateDrift>
+      <rateGaussianNoise>0.005 0.005 0.005 </rateGaussianNoise>
+      <headingDrift>0.005</headingDrift>
+      <headingGaussianNoise>0.005</headingGaussianNoise>
+    </plugin>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="heron_gps" filename="libheron_ros_gps.so">
+      <alwaysOn>true</alwaysOn>
+      <updateRate>10.0</updateRate>
+      <bodyName>base_link</bodyName>
+      <topicName>navsat/fix</topicName>
+      <velocityTopicName>navsat/vel</velocityTopicName>
+      <drift>5.0 5.0 5.0</drift>
+      <gaussianNoise>0.1 0.1 0.1</gaussianNoise>
+      <velocityDrift>0 0 0</velocityDrift>
+      <velocityGaussianNoise>0.1 0.1 0.1</velocityGaussianNoise>
+    </plugin>
+  </gazebo>
+
+  <gazebo reference="base_link">
+    <material>Gazebo/DarkGrey</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+    <gazebo reference="imu_link">
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+  <gazebo reference="navsat_link">
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+  <gazebo reference="left_panel_link">
+    <material>Gazebo/Yellow</material>
+  </gazebo>
+
+  <gazebo reference="right_panel_link">
+    <material>Gazebo/Yellow</material>
+  </gazebo>
+
+</robot>
