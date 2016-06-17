@@ -125,9 +125,10 @@ This program contains the description of the robot base model for the Clearpath 
     <joint name="navsat_joint" type="fixed">
       <parent link="base_link" />
       <child link="navsat_link" />
-      <origin xyz="$(optenv HERON_NAVSAT_XYZ 0.015 -0.050 0.072)"
-              rpy="$(optenv HERON_NAVSAT_RPY 0.0 0.0 0.0)" />
+      <origin xyz="$(optenv HERON_NAVSAT_UBLOX_XYZ 0.015 -0.050 0.072)"
+              rpy="$(optenv HERON_NAVSAT_UBLOX_RPY 0.0 0.0 0.0)" />
     </joint>
+
 
     <!-- Bring in simulation data for Gazebo. -->
     <xacro:include filename="$(find heron_description)/urdf/heron.gazebo" />

@@ -30,12 +30,17 @@
   </gazebo>
 
   <gazebo>
-    <plugin name="heron_gps" filename="libheron_ros_gps.so">
+    <plugin name="gps_controller" filename="libhector_gazebo_ros_gps.so">
       <alwaysOn>true</alwaysOn>
       <updateRate>10.0</updateRate>
-      <bodyName>base_link</bodyName>
+      <bodyName>navsat_link</bodyName>
+      <frameId>base_link</frameId>
       <topicName>navsat/fix</topicName>
       <velocityTopicName>navsat/vel</velocityTopicName>
+      <referenceLatitude>49.9</referenceLatitude>
+      <referenceLongitude>8.9</referenceLongitude>
+      <referenceHeading>0</referenceHeading>
+      <referenceAltitude>0</referenceAltitude>
       <drift>5.0 5.0 5.0</drift>
       <gaussianNoise>0.1 0.1 0.1</gaussianNoise>
       <velocityDrift>0 0 0</velocityDrift>

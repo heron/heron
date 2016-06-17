@@ -10,4 +10,17 @@
     heron_base/launch/base.launch
   -->
 
+
+  <!-- If enabled, generate a Novatel Smart6 payload. -->
+  <xacro:include filename="accessories/novatel_smart6.urdf.xacro" />
+  <xacro:if value="$(optenv HERON_NAVSAT_SMART6 0)">
+    <novatel_smart6 prefix="$(optenv HERON_NAVSAT_SMART6_MOUNT rear)"/>
+
+    <joint name="$(optenv HERON_NAVSAT_SMART6_MOUNT rear)_navsat_joint" type="fixed">
+      <origin xyz="0.30 0 0" rpy="0 0 0" />
+      <parent link="base_link" />
+      <child link="$(optenv HERON_NAVSAT_SMART6_MOUNT rear)_navsat" />
+    </joint>
+  </xacro:if>
+
 </robot>
