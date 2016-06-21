@@ -9,10 +9,11 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate messages in the 'msg' folder
 add_message_files(
   FILES
-  Sense.msg
-  Drive.msg
   Course.msg
+  Drive.msg
   Helm.msg
+  Power.msg
+  Sense.msg
 )
 
 generate_messages(

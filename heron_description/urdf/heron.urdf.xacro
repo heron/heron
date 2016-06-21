@@ -129,7 +129,6 @@ This program contains the description of the robot base model for the Clearpath 
               rpy="$(optenv HERON_NAVSAT_UBLOX_RPY 0.0 0.0 0.0)" />
     </joint>
 
-
     <!-- Bring in simulation data for Gazebo. -->
     <xacro:include filename="$(find heron_description)/urdf/heron.gazebo" />
 
