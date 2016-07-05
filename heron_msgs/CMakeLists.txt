@@ -12,8 +12,8 @@ add_message_files(
   Course.msg
   Drive.msg
   Helm.msg
-  Power.msg
   Sense.msg
+  Status.msg
 )
 
 generate_messages(
