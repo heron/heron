@@ -3,6 +3,17 @@ Changelog for package heron_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
+Forthcoming
+-----------
+* Updated the UM6 orientation.
+* Added SICK lms1xx laser and Axis ptz camera to accessories.
+* Added Power message.
+* Added optional Novatel Smart6 GPS, updated Gazebo GPS plugin and made default environment variables more specific.
+* Fixed IMU angle substitution.
+* Updated URDF.
+* Heron rename.
+* Contributors: Tony Baltovski
+
 0.1.0 (2014-12-02)
 ------------------
 * Add roslaunch file check to kingfisher_description.

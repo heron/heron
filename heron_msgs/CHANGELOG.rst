@@ -2,6 +2,14 @@
 Changelog for package heron_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Changed Power message to Status.
+* Added Power message.
+* Updated URDF.
+* Heron rename.
+* Contributors: Tony Baltovski
+
 0.1.0 (2014-12-02)
 ------------------
 * Adding a new Power message, to represent charge state info from MCU.
