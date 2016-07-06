@@ -10,17 +10,45 @@
     heron_base/launch/base.launch
   -->
 
-
   <!-- If enabled, generate a Novatel Smart6 payload. -->
   <xacro:include filename="accessories/novatel_smart6.urdf.xacro" />
   <xacro:if value="$(optenv HERON_NAVSAT_SMART6 0)">
     <novatel_smart6 prefix="$(optenv HERON_NAVSAT_SMART6_MOUNT rear)"/>
 
     <joint name="$(optenv HERON_NAVSAT_SMART6_MOUNT rear)_navsat_joint" type="fixed">
-      <origin xyz="0.30 0 0" rpy="0 0 0" />
+    <origin xyz="$(optenv HERON_NAVSAT_SMART6_OFFSET -0.25 0 0.08)"
+            rpy="$(optenv HERON_NAVSAT_SMART6_RPY 0 0 0)" />
       <parent link="base_link" />
       <child link="$(optenv HERON_NAVSAT_SMART6_MOUNT rear)_navsat" />
     </joint>
   </xacro:if>
+
+  <!-- If enabled, generate the LASER payload. -->
+  <xacro:include filename="accessories/sick_lms1xx_mount.urdf.xacro" />
+  <xacro:if value="$(optenv HERON_LASER 0)">
+    <sick_lms1xx_mount prefix="$(optenv HERON_LASER_MOUNT front)"
+                       topic="$(optenv HERON_LASER_TOPIC front/scan)"/>
+
+    <joint name="$(optenv HERON_LASER_MOUNT front)_laser_mount_joint" type="fixed">
+      <origin xyz="$(optenv HERON_LASER_OFFSET -0.12 0 0)"
+              rpy="$(optenv HERON_LASER_RPY 0 0 0)" />
+      <parent link="base_link" />
+      <child link="$(optenv HERON_LASER_MOUNT front)_laser_mount" />
+    </joint>
+  </xacro:if>
+
+  <!-- If enabled, generate a Axis P5514 payload. -->
+  <xacro:include filename="accessories/axis_ptz.urdf.xacro" />
+  <xacro:if value="$(optenv HERON_AXIS_PTZ 0)">
+    <axis_ptz prefix="$(optenv HERON_AXIS_PTZ_MOUNT axis_ptz)"/>
+
+    <joint name="$(optenv HERON_AXIS_PTZ_MOUNT axis_ptz)_camera_joint" type="fixed">
+    <origin xyz="$(optenv HERON_AXIS_PTZ_OFFSET -0.25 0 0.08)"
+            rpy="$(optenv HERON_AXIS_PTZ_RPY 0 0 0)" />
+      <parent link="base_link" />
+      <child link="$(optenv HERON_AXIS_PTZ_MOUNT axis_ptz)_camera_link" />
+    </joint>
+  </xacro:if>
+
 
 </robot>
