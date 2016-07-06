@@ -2,8 +2,8 @@
 Changelog for package heron_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.0 (2016-07-06)
+------------------
 * Changed Power message to Status.
 * Added Power message.
 * Updated URDF.

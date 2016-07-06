@@ -3,8 +3,8 @@ Changelog for package heron_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-Forthcoming
------------
+0.2.0 (2016-07-06)
+------------------
 * Updated the UM6 orientation.
 * Added SICK lms1xx laser and Axis ptz camera to accessories.
 * Added Power message.
