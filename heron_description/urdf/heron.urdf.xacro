@@ -42,7 +42,7 @@ This program contains the description of the robot base model for the Clearpath 
     <xacro:macro name="panel" params="side location">
       <!-- location flips the panel. 1 is for the left and -1 is for the right -->
       <joint name="base_${side}_joint" type="fixed">
-        <origin xyz="0 ${location*-0.35} 0.05" rpy="${PI/2} 0 ${location*PI/2}" />
+        <origin xyz="0.0 ${location*0.34495} 0.04959" rpy="0 0 0" />
         <parent link="base_link" />
         <child link="${side}_panel_link" />
       </joint>
@@ -87,7 +87,7 @@ This program contains the description of the robot base model for the Clearpath 
         </inertial>
 
         <visual>
-          <origin xyz="0 0 0" rpy="${PI/2} 0 ${PI/2}" />
+          <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
             <mesh filename="package://heron_description/meshes/heron_base.stl" />
           </geometry>
@@ -103,8 +103,8 @@ This program contains the description of the robot base model for the Clearpath 
     </link>
 
     <!-- Side Panels -->
-    <xacro:panel side="left" location="1" />
-    <xacro:panel side="right" location="-1" />
+    <panel side="left" location="1" />
+    <panel side="right" location="-1" />
 
     <link name="imu_link">
       <inertial>
