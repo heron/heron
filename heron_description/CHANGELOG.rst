@@ -3,6 +3,11 @@ Changelog for package heron_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
+Forthcoming
+-----------
+* Updated meshes and added rear plate.
+* Contributors: Tony Baltovski
+
 0.2.0 (2016-07-06)
 ------------------
 * Updated the UM6 orientation.
