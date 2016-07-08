@@ -3,8 +3,8 @@ Changelog for package heron_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-Forthcoming
------------
+0.2.1 (2016-07-08)
+------------------
 * Updated meshes and added rear plate.
 * Contributors: Tony Baltovski
 
