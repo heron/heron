@@ -3,6 +3,12 @@ Changelog for package heron_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
+Forthcoming
+-----------
+* Updated the UM6 orientation.
+* Added lms1xx as run dependency.
+* Contributors: Tony Baltovski
+
 0.2.1 (2016-07-08)
 ------------------
 * Updated meshes and added rear plate.
