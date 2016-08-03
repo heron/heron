@@ -3,8 +3,8 @@ Changelog for package heron_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-Forthcoming
------------
+0.2.2 (2016-08-03)
+------------------
 * Updated the UM6 orientation.
 * Added lms1xx as run dependency.
 * Contributors: Tony Baltovski
