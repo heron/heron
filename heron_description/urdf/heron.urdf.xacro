@@ -110,14 +110,14 @@ This program contains the description of the robot base model for the Clearpath 
       <inertial>
         <mass value="0.001"/>
         <origin xyz="0 0 0" rpy="0 0 0"/>
-        <inertia ixx="${dummy_inertia}" ixy="0.0" ixz="0.0" iyy="${dummy_inertia}" iyz="0.0" izz="${dummy_inertia}"/>
+        <inertia ixx="1e-09" ixy="0.0" ixz="0.0" iyy="1e-09" iyz="0.0" izz="1e-09"/>
       </inertial>
     </link>
     <joint name="imu_joint" type="fixed">
       <parent link="base_link" />
       <child link="imu_link" />
-      <origin xyz="$(optenv HERON_IMU_UM6_XYZ 0.015 0.0 0.072)"
-              rpy="$(optenv HERON_IMU_UM6_RPY 0.0 3.14159 1.5708)" />
+      <origin xyz="0.015 0.0 0.072"
+              rpy="0.0 3.14159 1.5708" />
     </joint>
 
     <link name="navsat_link" />
@@ -125,8 +125,8 @@ This program contains the description of the robot base model for the Clearpath 
     <joint name="navsat_joint" type="fixed">
       <parent link="base_link" />
       <child link="navsat_link" />
-      <origin xyz="$(optenv HERON_NAVSAT_UBLOX_XYZ 0.015 -0.050 0.072)"
-              rpy="$(optenv HERON_NAVSAT_UBLOX_RPY 0.0 0.0 0.0)" />
+      <origin xyz="0.015 -0.050 0.072"
+              rpy="0.0 0.0 0.0" />
     </joint>
 
     <!-- Bring in simulation data for Gazebo. -->
@@ -135,9 +135,9 @@ This program contains the description of the robot base model for the Clearpath 
     <!-- Optional standard accessories, including their simulation data. The rendering
          of these into the final description is controlled by optenv variables, which
          default each one to off.-->
-    <xacro:include filename="$(find heron_description)/urdf/accessories.urdf.xacro" />
+    <!-- <xacro:include filename="$(find heron_description)/urdf/accessories.urdf.xacro" /> -->
 
     <!-- Optional custom includes. -->
-    <xacro:include filename="$(optenv HERON_URDF_EXTRAS empty.urdf)" />
+    <!-- <xacro:include filename="$(optenv HERON_URDF_EXTRAS empty.urdf)" /> -->
 
 </robot>

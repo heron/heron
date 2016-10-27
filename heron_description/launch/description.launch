@@ -2,8 +2,6 @@
   <arg name="config" default="base" />
 
   <param name="robot_description"
-         command="$(find heron_description)/scripts/env_run
-                    $(find heron_description)/urdf/configs/$(arg config)
-                    $(find xacro)/xacro $(find heron_description)/urdf/heron.urdf.xacro" />
+         command="$(find xacro)/xacro $(find heron_description)/urdf/heron.urdf.xacro" />
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 </launch>
