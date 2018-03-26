@@ -28,7 +28,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 This program contains the description of the robot base model for the Clearpath Heron
 -->
 
-<robot name="heron" xmlns:xacro="http://ros.org/wiki/xacro">
+<robot name="heron" xmlns:xacro="http://www.ros.org/wiki/xacro">
     <xacro:property name="PI" value="3.1415926535897931" />
 
     <xacro:property name="dummy_inertia" value="1e-09"/>

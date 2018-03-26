@@ -1,4 +1,4 @@
-<robot>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
   <!-- This file is a placeholder which is included by default from
        heron.urdf.xacro. If a robot is being customized and requires
        additional URDF, set the HERON_URDF_EXTRAS environment variable
