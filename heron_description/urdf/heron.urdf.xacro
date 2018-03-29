@@ -116,8 +116,8 @@ This program contains the description of the robot base model for the Clearpath 
     <joint name="imu_joint" type="fixed">
       <parent link="base_link" />
       <child link="imu_link" />
-      <origin xyz="$(optenv HERON_IMU_UM6_XYZ 0.015 0.0 0.072)"
-              rpy="$(optenv HERON_IMU_UM6_RPY 0.0 3.14159 1.5708)" />
+      <origin xyz="$(optenv HERON_IMU_UM6_XYZ -0.290 0.0 0.024)"
+              rpy="$(optenv HERON_IMU_UM6_RPY 3.14159 0.0 0.0)" />
     </joint>
 
     <link name="navsat_link" />
@@ -125,7 +125,7 @@ This program contains the description of the robot base model for the Clearpath 
     <joint name="navsat_joint" type="fixed">
       <parent link="base_link" />
       <child link="navsat_link" />
-      <origin xyz="$(optenv HERON_NAVSAT_UBLOX_XYZ 0.015 -0.050 0.072)"
+      <origin xyz="$(optenv HERON_NAVSAT_UBLOX_XYZ 0.015 0.050 0.072)"
               rpy="$(optenv HERON_NAVSAT_UBLOX_RPY 0.0 0.0 0.0)" />
     </joint>
 
