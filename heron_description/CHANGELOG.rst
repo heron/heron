@@ -3,6 +3,12 @@ Changelog for package heron_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
+Forthcoming
+-----------
+* Updated gps and imu default locations for next version of heron
+* Updated stls and xacro definitions for kinetic syntax changes
+* Contributors: Dave Niewinski
+
 0.2.3 (2018-04-12)
 ------------------
 * Added missing sonar link.
