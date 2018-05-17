@@ -8,24 +8,7 @@ sensor_timeout: 0.1
 two_d_mode: true
 transform_time_offset: 0.0
 transform_timeout: 0.0
-print_diagnostics: false
-debug: true
-debug_out_file: /home/administrator/rl_gps_debug.txt
 use_control: false
-
-# -------------------------------------
-# Wheel Odometry:
-# -------------------------------------
-# odom0: /jackal_velocity_controller/odom
-# odom0_config: [false, false, false,
-#                false, false, false,
-#                true,  true,  false,
-#                false, false, true,
-#                false, false, false]
-# odom0_queue_size: 10
-# odom0_nodelay: true
-# odom0_differential: false
-# odom0_relative: false
 
 # -------------------------------------
 # External IMU:
