@@ -1,4 +1,4 @@
-frequency: 50
+frequency: 20
 delay: 0.0
 magnetic_declination_radians: 0
 yaw_offset: 0.0
@@ -8,4 +8,3 @@ broadcast_utm_transform_as_parent_frame: true
 publish_filtered_gps: false
 use_odometry_yaw: false
 wait_for_datum: false
-#datum: [43.50076203, -80.54629721, 0.0]
