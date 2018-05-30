@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package>
+  <name>heron_control</name>
+  <version>0.3.0</version>
+  <description>Control package for Heron</description>
+
+  <maintainer email="mpurvis@clearpathrobotics.com">Mike Purvis</maintainer>
+  <author email="yanma@clearpathrobotics.com">Yan Ma</author>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <run_depend>robot_localization</run_depend>
+</package>
