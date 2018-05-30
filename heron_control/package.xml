@@ -2,7 +2,7 @@
 <package>
   <name>heron_control</name>
   <version>0.3.0</version>
-  <description>URDF description for Heron</description>
+  <description>Control package for Heron</description>
 
   <maintainer email="mpurvis@clearpathrobotics.com">Mike Purvis</maintainer>
   <author email="yanma@clearpathrobotics.com">Yan Ma</author>
