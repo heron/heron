@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!--
+    Some examples of sensors that can be added to the vehicle frame.
+    Set the origin of the sensor frames correctly for your application
+    Look into the sensor macros in the package uuv_sensor_ros_plugins/urdf for
+    more examples or add you own custom sensor units.
+  -->
+  <!-- GPS -->
+  <!-- <xacro:gps_sensor_macro
+    namespace="${namespace}"
+    parent_link="${namespace}/base_link"
+    gps_topic="navsat/fix"
+    update_rate="30"
+    mass_gps_sensor="0.001"
+    horizontal_pos_std_dev="0.01"
+    vertical_pos_std_dev="0.01"
+    horizontal_vel_std_dev="0.01"
+    vertical_vel_std_dev="0.01">
+    <inertia ixx="0.00001" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.00001" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </xacro:gps_sensor_macro> -->
+
+  <gazebo>
+    <plugin name="gps_controller" filename="libhector_gazebo_ros_gps.so">
+      <updateRate>40</updateRate>
+      <robotNamespace>$(arg namespace)</robotNamespace>
+      <frameId>$(arg namespace)/base_link</frameId>
+      <bodyName>$(arg namespace)/base_link</bodyName>
+      <topicName>/$(arg namespace)/navsat/fix</topicName>
+      <velocityTopicName>/$(arg namespace)/navsat/vel_sim</velocityTopicName>
+      <referenceLatitude>49.9</referenceLatitude>
+      <referenceLongitude>8.9</referenceLongitude>
+      <referenceHeading>90</referenceHeading>
+      <referenceAltitude>0</referenceAltitude>
+      <drift>0.0001 0.0001 0.0001</drift>
+    </plugin>
+  </gazebo>
+
+  <!-- IMU -->
+  <!-- <xacro:imu_plugin_macro
+      namespace="${namespace}"
+      imu_suffix=""
+      parent_link="${namespace}/base_link"
+      imu_topic="imu/data_raw"
+      mass_imu_sensor="0.015"
+      gyroscope_noise_density="0.0003394"
+      gyroscope_random_walk="0.000038785"
+      gyroscope_bias_correlation_time="1000.0"
+      gyroscope_turn_on_bias_sigma="0.0087"
+      accelerometer_noise_density="0.004"
+      accelerometer_random_walk="0.006"
+      accelerometer_bias_correlation_time="300.0"
+      accelerometer_turn_on_bias_sigma="0.1960"
+      orientation_noise="0.01"
+      enable_local_ned_frame="false"
+      reference_frame="world"
+      update_rate="50">
+      <inertia ixx="0.00001" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.00001" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </xacro:imu_plugin_macro> -->
+
+    <xacro:imu_plugin_macro
+        namespace="${namespace}"
+        imu_suffix=""
+        parent_link="${namespace}/base_link"
+        imu_topic="imu/data_raw"
+        mass_imu_sensor="0.015"
+        gyroscope_noise_density="0.0003394"
+        gyroscope_random_walk="0.000038785"
+        gyroscope_bias_correlation_time="1000.0"
+        gyroscope_turn_on_bias_sigma="0.0087"
+        accelerometer_noise_density="0.04"
+        accelerometer_random_walk="0.006"
+        accelerometer_bias_correlation_time="300.0"
+        accelerometer_turn_on_bias_sigma="0.1960"
+        orientation_noise="0.01"
+        enable_local_ned_frame="false"
+        reference_frame="world"
+        update_rate="50">
+        <inertia ixx="0.00001" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.00001" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+      </xacro:imu_plugin_macro>
+
+    <xacro:magnetometer_plugin_macro
+        namespace="${namespace}"
+        suffix=""
+        parent_link="${namespace}/base_link"
+        topic="imu/mag_sim"
+        mass="0.015"
+        update_rate="50"
+        mag_intensity="65.0"
+        noise_xy="0.25"
+        noise_z="0.35"
+        turn_on_bias="2.0">
+        <inertia ixx="0.00001" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.00001" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+      </xacro:magnetometer_plugin_macro>
+
+      <!-- Mount a Perfect Pose 3D sensor. -->
+      <xacro:default_pose_3d_macro
+        namespace="${namespace}"
+        parent_link="${namespace}/base_link"
+        inertial_reference_frame="world" />
+
+</robot>

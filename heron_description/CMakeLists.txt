@@ -1,9 +1,14 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(heron_description)
 
-find_package(catkin REQUIRED COMPONENTS roslaunch)
+find_package(catkin REQUIRED COMPONENTS
+    heron_msgs
+    uuv_gazebo_ros_plugins_msgs
+)
 
-catkin_package()
+catkin_package(
+  CATKIN_DEPENDS heron_msgs uuv_gazebo_ros_plugins_msgs
+)
 
 roslaunch_add_file_check(launch/description.launch)
 

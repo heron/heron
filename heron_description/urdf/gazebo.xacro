@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- Center of buoyancy -->
+    <xacro:property name="heron_cob" value="0 0 0"/>
+
+    <!-- Vehicle's actual volume (Gazebo cannot compute the volume out of the mesh) -->
+    <xacro:property name="heron_volume" value="0.13"/>
+
+    <!-- Describing the dimensions of the vehicle's bounding box -->
+    <xacro:property name="heron_length" value="1.35"/>
+    <xacro:property name="heron_width"  value="1.0"/>
+    <xacro:property name="heron_height" value="0.32"/>
+
+    <xacro:macro name="heron_hydro_model" params="namespace">
+
+      <!-- List of hydrodynamic models this robot's links -->
+      <link name="${namespace}/base_link">
+              <volume>${heron_volume}</volume>
+              <box>
+                  <width>${heron_width}</width>
+                  <length>${heron_length}</length>
+                  <height>${heron_height}</height>
+              </box>
+              <center_of_buoyancy>${heron_cob}</center_of_buoyancy>
+              <!-- The buoyancy plugin in the UUV Simulator can then be adapted
+                   to receive the additional parameters used to describe the
+                   buoyancy force computation for the surface vessel.
+              -->
+              <metacentric_width>0.1</metacentric_width>
+              <metacentric_length>0.1</metacentric_length>
+              <submerged_height>0.02</submerged_height>
+              <hydrodynamic_model>
+                  <type>fossen</type>
+                  <added_mass>
+                     0   0   0   0   0   0
+                     0   0   0   0   0   0
+                     0   0   0   0   0   0
+                     0   0   0   0   0   0
+                     0   0   0   0   0   0
+                     0   0   0   0   0   0
+                </added_mass>
+                <offset_added_mass>0</offset_added_mass>
+                  <linear_damping>
+                      -16.44998712 -15.79776044 -100 -13 -13 -6
+                  </linear_damping>
+                  <quadratic_damping>
+                    -2.942 -2.7617212 -10 -5 -5 -5
+                  </quadratic_damping>
+
+                  <!-- Sanity check -->
+                  <linear_damping_forward_speed>
+                    0 0 0 0 0 0
+                  </linear_damping_forward_speed>
+                  <offset_linear_damping>
+                    0
+                  </offset_linear_damping>
+                  <offset_lin_forward_speed_damping>
+                    0
+                  </offset_lin_forward_speed_damping>
+                  <offset_nonlin_damping>
+                    0
+                  </offset_nonlin_damping>
+                  <scaling_damping>1.0</scaling_damping>
+
+              </hydrodynamic_model>
+          </link>
+
+    </xacro:macro>
+
+</robot>

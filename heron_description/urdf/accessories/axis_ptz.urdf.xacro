@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-  <xacro:macro name="axis_ptz" params="prefix">
-  <link name="${prefix}_camera_link">
+  <xacro:macro name="axis_ptz" params="prefix namespace">
+  <link name="${namespace}/${prefix}_camera_link">
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>

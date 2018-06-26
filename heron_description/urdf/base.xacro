@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!--
+    Vehicle's parameters (remember to enter the model parameters below)
+  -->
+
+  <xacro:property name="mass" value="28"/>
+  <!-- Center of gravity -->
+  <xacro:property name="cog" value="0 0 -0.13"/>
+  <!-- Fluid density -->
+  <xacro:property name="rho" value="1028"/>
+
+
+  <!-- Loading some constants -->
+  <xacro:include filename="$(find uuv_descriptions)/models/common/urdf/common.urdf.xacro"/>
+  <!-- Loading file with sensor macros -->
+  <xacro:include filename="$(find uuv_sensor_ros_plugins)/urdf/sensor_snippets.xacro"/>
+  <!-- Loading the UUV simulator ROS plugin macros -->
+  <xacro:include filename="$(find uuv_gazebo_ros_plugins)/urdf/snippets.xacro"/>
+  <!-- Loading vehicle's specific macros -->
+  <xacro:include filename="$(find heron_description)/urdf/snippets.xacro"/>
+
+
+  <!--
+    Visual mesh file for the vehicle, usually in DAE (Collada) format. Be sure to store the
+    mesh with the origin of the mesh on the same position of the center of mass, otherwise
+    the mesh pose will have to be corrected below in the <visual> block.
+    Open the meshes for the RexROV vehicle in Blender to see an example on the mesh placement.
+  -->
+  <xacro:property name="visual_mesh_file" value="file://$(find heron_description)/meshes/heron_base.stl"/>
+
+  <!-- Collision geometry mesh, usually in STL format (it is recommended to keep
+  this geometry as simple as possible to improve the performance the physics engine
+  regarding the computation of collision forces) -->
+  <xacro:property name="collision_mesh_file" value="file://$(find heron_description)/meshes/heron_base.stl"/>
+
+  <material name="gray"><color rgba="0.7 0.7 0.7 1.0"/></material>
+  <material name="dark_gray"><color rgba="0.2 0.2 0.2 1.0"/></material>
+  <material name="yellow"><color rgba="0.8 0.8 0.0 1.0"/></material>
+
+  <xacro:macro name="panel" params="namespace side location">
+
+
+      <!-- location flips the panel. 1 is for the left and -1 is for the right -->
+      <joint name="${namespace}/base_${side}_joint" type="fixed">
+        <origin xyz="0.0 ${location * 0.34495} 0.04959" rpy="0 0 0" />
+        <parent link="${namespace}/base_link" />
+        <child link="${namespace}/${side}_panel_link" />
+      </joint>
+
+      <link name="${namespace}/${side}_panel_link">
+        <inertial>
+          <mass value="0.1" />
+          <origin xyz="0.00000000 0.00000000 0.00000000" />
+          <inertia ixx="0.01" ixy="0.00" ixz="0.00"
+            iyy="0.01" iyz="0.00" izz="0.01" />
+        </inertial>
+
+        <visual>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+            <mesh filename="file://$(find heron_description)/meshes/${side}_panel.stl" />
+          </geometry>
+          <material name="yellow" />
+        </visual>
+      </link>
+
+      <gazebo reference="${namespace}/${side}_panel_link">
+        <material>Gazebo/Yellow</material>
+      </gazebo>
+    </xacro:macro>
+
+  <!-- Vehicle macro -->
+  <xacro:macro name="heron_base" params="namespace *gazebo">
+
+
+      <!-- Rigid body description of the base link -->
+      <link name="${namespace}/base_link">
+        <!--
+          Be careful to setup the coefficients for the inertial tensor,
+          otherwise your model will become unstable on Gazebo
+        -->
+
+        <visual>
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+          <geometry>
+            <mesh filename="${visual_mesh_file}" scale="1 1 1" />
+          </geometry>
+          <material name="dark_gray" />
+        </visual>
+
+        <collision>
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+          <geometry>
+            <mesh filename="${collision_mesh_file}" scale="1 1 1" />
+          </geometry>
+        </collision>
+      </link>
+
+      <!-- Dummy Link to contain the inertial information for base_link -->
+      <link name="dummy_link">
+        <inertial>
+          <mass value="${mass}" />
+          <origin xyz="${cog}" rpy="0 0 0"/>
+          <inertia ixx="10" ixy="0" iyy = "10" ixz="0" iyz="0" izz="10" />
+          <!-- <inertia ixx="0.017474" ixy="-0.000013" ixz="-0.000102"
+                                  iyy="0.017781"  iyz="-0.000058"
+                                                  izz="0.033235" /> -->
+
+        </inertial>
+      </link>
+
+      <joint name="dummy_to_base" type="fixed">
+        <parent link="${namespace}/base_link" />
+        <child link="dummy_link" />
+      </joint>
+
+    <gazebo reference="${namespace}/base_link">
+      <selfCollide>false</selfCollide>
+      <material>Gazebo/DarkGrey</material>
+      <gravity>1</gravity>
+    </gazebo>
+
+    <!-- Set up hydrodynamic plugin given as input parameter -->
+    <xacro:insert_block name="gazebo"/>
+
+    <!-- Include the thruster modules -->
+    <xacro:include filename="$(find heron_description)/urdf/actuators.xacro"/>
+
+    <!-- Include the sensor modules -->
+    <xacro:include filename="$(find heron_description)/urdf/sensors.xacro"/>
+
+
+    <xacro:panel namespace="$(arg namespace)" side="left" location="1" />
+    <xacro:panel namespace="$(arg namespace)" side="right" location="-1" />
+
+    <xacro:include filename="$(find heron_description)/urdf/accessories.urdf.xacro" />
+
+    <!-- Optional custom includes. -->
+    <xacro:include filename="$(optenv HERON_URDF_EXTRAS empty.urdf)" />
+
+  </xacro:macro>
+
+</robot>

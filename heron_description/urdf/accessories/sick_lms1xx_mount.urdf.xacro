@@ -3,20 +3,20 @@
 
   <xacro:include filename="$(find lms1xx)/urdf/sick_lms1xx.urdf.xacro" />
 
-  <xacro:macro name="sick_lms1xx_mount" params="prefix topic">
+  <xacro:macro name="sick_lms1xx_mount" params="prefix topic namespace">
 
-    <sick_lms1xx frame="${prefix}_laser" topic="${topic}" />
+    <sick_lms1xx frame="${namespace}/${prefix}_laser" topic="${namespace}/${topic}" />
 
-    <link name="${prefix}_laser_mount"/>
+    <link name="${namespace}/${prefix}_laser_mount"/>
 
-    <joint name="${prefix}_laser_joint" type="fixed">
+    <joint name="$${namespace}/{prefix}_laser_joint" type="fixed">
       <!-- This offset is from the base of the bracket to the LIDAR's focal point. -->
       <origin xyz="0 0 0.149" rpy="0 0 0" />
-      <parent link="${prefix}_laser_mount" />
-      <child link="${prefix}_laser" />
+      <parent link="${namespace}/${prefix}_laser_mount" />
+      <child link="${namespace}/${prefix}_laser" />
     </joint>
 
-    <gazebo reference="${prefix}_laser_mount">
+    <gazebo reference="${namespace}/${prefix}_laser_mount">
       <material>Gazebo/DarkGrey</material>
     </gazebo>
 

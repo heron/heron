@@ -1,143 +1,35 @@
 <?xml version="1.0"?>
-<!--
-Copyright (c) 2012-2016, Clearpath Robotics
-All rights reserved.
+<robot name="heron" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+  <xacro:arg name="debug" default="0"/>
+  <xacro:arg name="namespace" default="heron"/>
+  <!-- Include the ROV macro file -->
+  <xacro:include filename="$(find heron_description)/urdf/base.xacro"/>
+  <xacro:include filename="$(find heron_description)/urdf/gazebo.xacro"/>
 
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
-    * Redistributions of source code must retain the above copyright
-      notice, this list of conditions and the following disclaimer.
-    * Redistributions in binary form must reproduce the above copyright
-      notice, this list of conditions and the following disclaimer in the
-      documentation and/or other materials provided with the distribution.
-    * Neither the name of Clearpath Robotics nor the
-      names of its contributors may be used to endorse or promote products
-      derived from this software without specific prior written permission.
+  <!-- Create the heron -->
+  <xacro:heron_base namespace="$(arg namespace)">
+    <!-- The underwater object plugin is given as an input block parameter to
+     allow the addition of external models of manipulator units -->
+    <gazebo>
+      <plugin name="uuv_plugin" filename="libunderwater_object_ros_plugin.so">
+        <fluid_density>1028.0</fluid_density>
+        <flow_velocity_topic>hydrodynamics/current_velocity</flow_velocity_topic>
+        <debug>$(arg debug)</debug>
+        <!-- Adding the hydrodynamic and hydrostatic parameters for the vehicle-->
+        <xacro:heron_hydro_model namespace="$(arg namespace)" />
+        <!--
+          In case other modules are added to the vehicle (such as a manipulator)
+          that also have link running with the underwater object plugin, they
+          should also be added in this block. For this, this new module should
+          have a file similar to gazebo.xacro above with the description of the
+          parameter necessary for the underwater object plugin to be initialized.
+        -->
+      </plugin>
+    </gazebo>
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY
-DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  </xacro:heron_base>
 
-This program contains the description of the robot base model for the Clearpath Heron
--->
-
-<robot name="heron" xmlns:xacro="http://www.ros.org/wiki/xacro">
-    <xacro:property name="PI" value="3.1415926535897931" />
-
-    <xacro:property name="dummy_inertia" value="1e-09"/>
-
-    <material name="black"><color rgba="0.0 0.0 0.0 1.0"/></material>
-    <material name="gray"><color rgba="0.7 0.7 0.7 1.0"/></material>
-    <material name="dark_gray"><color rgba="0.2 0.2 0.2 1.0"/></material>
-    <material name="white"><color rgba="1.0 1.0 1.0 1.0"/></material>
-    <material name="yellow"><color rgba="0.8 0.8 0.0 1.0"/></material>
-
-    <xacro:macro name="panel" params="side location">
-      <!-- location flips the panel. 1 is for the left and -1 is for the right -->
-      <joint name="base_${side}_joint" type="fixed">
-        <origin xyz="0.0 ${location*0.34495} 0.04959" rpy="0 0 0" />
-        <parent link="base_link" />
-        <child link="${side}_panel_link" />
-      </joint>
-
-      <link name="${side}_panel_link">
-        <inertial>
-          <mass value="0.1" />
-          <origin xyz="0.00000000 0.00000000 0.00000000" />
-          <inertia ixx="0.01" ixy="0.00" ixz="0.00"
-            iyy="0.01" iyz="0.00" izz="0.01" />
-        </inertial>
-        <visual>
-          <origin xyz="0 0 0" rpy="0 0 0" />
-          <geometry>
-            <mesh filename="package://heron_description/meshes/${side}_panel.stl" />
-          </geometry>
-          <material name="yellow" />
-        </visual>
-        <collision>
-          <origin xyz="0 0 0" rpy="0 0 0"/>
-          <geometry>
-            <!-- The collision boundary for parts are taken into account by collision boundary of the base_link. -->
-            <box size="0.001 0.001 0.001" />
-          </geometry>
-        </collision>
-      </link>
-
-    </xacro:macro>
-
-    <link name="base_link">
-        <inertial>
-          <mass value="29" />
-          <!-- This is the pose of the inertial reference frame, relative to the link reference frame.
-               The origin of the inertial reference frame needs to be at the center of gravity.
-               The axes of the inertial reference frame do not need to be aligned with the
-               principal axes of the inertia. -->
-          <origin xyz="0 0 0" />
-          <!-- The 3x3 rotational inertia matrix. Because the rotational inertia matrix is symmetric,
-               only 6 above-diagonal elements of this matrix are specified here, using the attributes
-              ixx, ixy, ixz, iyy, iyz, izz.-->
-          <inertia ixx="10" ixy="0" ixz="0" iyy="10" iyz="0" izz="10" />
-        </inertial>
-
-        <visual>
-          <origin xyz="0 0 0" rpy="0 0 0" />
-          <geometry>
-            <mesh filename="package://heron_description/meshes/heron_base.stl" />
-          </geometry>
-          <material name="dark_gray" />
-        </visual>
-
-        <collision>
-          <origin xyz="0 0 0" rpy="0 0 0" />
-          <geometry>
-            <box size = "0.1 0.1 0.1"/> <!--making it slightly bigger in x and z direction-->
-          </geometry>
-        </collision>
-    </link>
-
-    <!-- Side Panels -->
-    <panel side="left" location="1" />
-    <panel side="right" location="-1" />
-
-    <link name="imu_link">
-      <inertial>
-        <mass value="0.001"/>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-        <inertia ixx="${dummy_inertia}" ixy="0.0" ixz="0.0" iyy="${dummy_inertia}" iyz="0.0" izz="${dummy_inertia}"/>
-      </inertial>
-    </link>
-    <joint name="imu_joint" type="fixed">
-      <parent link="base_link" />
-      <child link="imu_link" />
-      <origin xyz="$(optenv HERON_IMU_UM6_XYZ -0.290 0.0 0.024)"
-              rpy="$(optenv HERON_IMU_UM6_RPY 3.14159 0.0 0.0)" />
-    </joint>
-
-    <link name="navsat_link" />
-
-    <joint name="navsat_joint" type="fixed">
-      <parent link="base_link" />
-      <child link="navsat_link" />
-      <origin xyz="$(optenv HERON_NAVSAT_UBLOX_XYZ 0.015 0.050 0.072)"
-              rpy="$(optenv HERON_NAVSAT_UBLOX_RPY 0.0 0.0 0.0)" />
-    </joint>
-
-    <!-- Bring in simulation data for Gazebo. -->
-    <xacro:include filename="$(find heron_description)/urdf/heron.gazebo" />
-
-    <!-- Optional standard accessories, including their simulation data. The rendering
-         of these into the final description is controlled by optenv variables, which
-         default each one to off.-->
-    <xacro:include filename="$(find heron_description)/urdf/accessories.urdf.xacro" />
-
-    <!-- Optional custom includes. -->
-    <xacro:include filename="$(optenv HERON_URDF_EXTRAS empty.urdf)" />
+  <!-- Joint state publisher plugin -->
+  <xacro:default_joint_state_publisher namespace="$(arg namespace)" update_rate="10"/>
 
 </robot>
