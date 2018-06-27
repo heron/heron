@@ -23,8 +23,9 @@
    <plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
      <robotNamespace>$(arg namespace)</robotNamespace>
      <updateRate>50.0</updateRate>
-     <bodyName>imu_link</bodyName>
-     <topicName>imu/data</topicName>
+     <bodyName>$(arg namespace)/imu_link</bodyName>
+     <frameId>$(arg namespace)/imu_link</frameId>
+     <topicName>/$(arg namespace)/imu/data_raw</topicName>
      <accelDrift>0.005 0.005 0.005</accelDrift>
      <accelGaussianNoise>0.005 0.005 0.005</accelGaussianNoise>
      <rateDrift>0.005 0.005 0.005 </rateDrift>
@@ -34,30 +35,37 @@
    </plugin>
  </gazebo>
 
+ <link name="$(arg namespace)/imu_link" />
+ <joint name="$(arg namespace)/imu_joint" type="fixed">
+  <origin xyz="-0.1397 0 0" rpy="0 0 0" />
+  <parent link="$(arg namespace)/base_link" />
+  <child link="$(arg namespace)/imu_link" />
+</joint>
+
  <!-- Magnetometer -->
  <gazebo>
    <plugin name="mag_controller" filename="libhector_gazebo_ros_magnetic.so">
      <updateRate>50</updateRate>
      <robotNamespace>$(arg namespace)</robotNamespace>
-     <bodyName>imu_link</bodyName>
-     <frameId>imu_link</frameId>
-     <topicName>/imu/mag</topicName>
+     <bodyName>$(arg namespace)/imu_link</bodyName>
+     <frameId>$(arg namespace)/imu_link</frameId>
+     <topicName>/$(arg namespace)/imu/mag</topicName>
      <referenceHeading>90</referenceHeading>
      <drift>0.0005 0.0005 0.0005</drift>
      <gaussianNoise>0.025 0.025 0.025</gaussianNoise>
    </plugin>
  </gazebo>
 
-    <!-- Mount a Perfect Pose 3D sensor. -->
-    <gazebo>
-      <plugin filename="libgazebo_ros_p3d.so" name="quadrotor_groundtruth_sim">
-        <updateRate>20.0</updateRate>
-        <robotNamespace>$(arg namespace)</robotNamespace>
-        <bodyName>base_link</bodyName>
-        <topicName>pose_gt</topicName>
-        <gaussianNoise>0.0</gaussianNoise>
-        <frameName>world</frameName>
-      </plugin>
-    </gazebo>
+  <!-- Mount a Perfect Pose 3D sensor. -->
+  <gazebo>
+    <plugin filename="libgazebo_ros_p3d.so" name="groundtruth_sim">
+      <updateRate>20.0</updateRate>
+      <robotNamespace>$(arg namespace)</robotNamespace>
+      <bodyName>$(arg namespace)/base_link</bodyName>
+      <topicName>/$(arg namespace)/pose_gt</topicName>
+      <gaussianNoise>0.0</gaussianNoise>
+      <frameName>world</frameName>
+    </plugin>
+  </gazebo>
 
 </robot>
