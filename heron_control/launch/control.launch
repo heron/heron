@@ -10,4 +10,6 @@
     <param name="wait_for_datum" value="$(eval optenv('GPS_DATUM') != '')" />
   </node>
 
+  <node pkg="heron_control" type="vel_cov.py" name="navsat_vel_cov" />
+
 </launch>
