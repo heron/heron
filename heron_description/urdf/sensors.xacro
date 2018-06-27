@@ -6,8 +6,8 @@
     <plugin name="gps_controller" filename="libhector_gazebo_ros_gps.so">
       <updateRate>40</updateRate>
       <robotNamespace>$(arg namespace)</robotNamespace>
-      <frameId>$(arg namespace)/base_link</frameId>
-      <bodyName>$(arg namespace)/base_link</bodyName>
+      <frameId>$(arg namespace)/navsat_link</frameId>
+      <bodyName>$(arg namespace)/navsat_link</bodyName>
       <topicName>/$(arg namespace)/navsat/fix</topicName>
       <velocityTopicName>/$(arg namespace)/navsat/vel</velocityTopicName>
       <referenceLatitude>49.9</referenceLatitude>
@@ -17,6 +17,15 @@
       <drift>0.0001 0.0001 0.0001</drift>
     </plugin>
   </gazebo>
+  <link name="$(arg namespace)/navsat_link" />
+
+  <joint name="navsat_joint" type="fixed">
+    <parent link="$(arg namespace)/base_link" />
+    <child link="$(arg namespace)/navsat_link" />
+    <origin xyz="$(optenv HERON_NAVSAT_UBLOX_XYZ 0.015 0.050 0.072)"
+              rpy="$(optenv HERON_NAVSAT_UBLOX_RPY 0.0 0.0 0.0)" />
+  </joint>
+	
 
   <!-- IMU -->
   <gazebo>
@@ -37,7 +46,7 @@
 
  <link name="$(arg namespace)/imu_link" />
  <joint name="$(arg namespace)/imu_joint" type="fixed">
-  <origin xyz="-0.1397 0 0" rpy="0 0 0" />
+  <origin xyz="$(optenv HERON_IMU_UM6_XYZ -0.1397 0.0 0)" rpy="$(optenv HERON_IMU_UM6_RPY 0 0.0 0.0)" />
   <parent link="$(arg namespace)/base_link" />
   <child link="$(arg namespace)/imu_link" />
 </joint>
