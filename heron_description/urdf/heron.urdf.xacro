@@ -27,7 +27,8 @@ This program contains the description of the robot base model for the Clearpath 
 
 <robot name="heron" xmlns:xacro="http://www.ros.org/wiki/xacro" >
   <xacro:arg name="debug" default="0"/>
-  <xacro:arg name="namespace" default="heron"/>
+  <xacro:arg name="namespace" default="/"/>
+
   <!-- Include the ROV macro file -->
   <xacro:include filename="$(find heron_description)/urdf/base.xacro"/>
   <xacro:include filename="$(find heron_description)/urdf/gazebo.xacro"/>
@@ -51,11 +52,17 @@ This program contains the description of the robot base model for the Clearpath 
           parameter necessary for the underwater object plugin to be initialized.
         -->
       </plugin>
+
     </gazebo>
 
   </xacro:heron_base>
 
   <!-- Joint state publisher plugin -->
-  <xacro:default_joint_state_publisher namespace="$(arg namespace)" update_rate="10"/>
+  <gazebo>
+    <plugin name="joint_state_publisher" filename="libjoint_state_publisher.so">
+      <robotNamespace>$(arg namespace)</robotNamespace>
+      <updateRate>10</updateRate>
+    </plugin>
+  </gazebo>
 
 </robot>

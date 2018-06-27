@@ -4,7 +4,7 @@
   <arg name="config" default="base" />
 
   <!-- Vehicle's namespace -->
-  <arg name="namespace" default="heron"/>
+  <arg name="namespace" default="/"/>
 
   <group ns="$(arg namespace)">
     <param name="robot_description"
