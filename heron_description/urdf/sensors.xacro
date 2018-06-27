@@ -9,7 +9,7 @@
       <frameId>$(arg namespace)/base_link</frameId>
       <bodyName>$(arg namespace)/base_link</bodyName>
       <topicName>/$(arg namespace)/navsat/fix</topicName>
-      <velocityTopicName>/$(arg namespace)/navsat/vel_sim</velocityTopicName>
+      <velocityTopicName>/$(arg namespace)/navsat/vel</velocityTopicName>
       <referenceLatitude>49.9</referenceLatitude>
       <referenceLongitude>8.9</referenceLongitude>
       <referenceHeading>90</referenceHeading>
