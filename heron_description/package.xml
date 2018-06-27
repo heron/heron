@@ -11,14 +11,12 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
-  <build_depend>uuv_gazebo_ros_plugins_msgs</build_depend>
   <build_depend>heron_msgs</build_depend>
   <build_depend>roslaunch</build_depend>
   <run_depend>lms1xx</run_depend>
   <run_depend>robot_state_publisher</run_depend>
   <run_depend>urdf</run_depend>
   <run_depend>xacro</run_depend>
-  <run_depend>uuv_gazebo_ros_plugins_msgs</run_depend>
   <run_depend>heron_msgs</run_depend>
 
 
