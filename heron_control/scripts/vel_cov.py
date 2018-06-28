@@ -40,9 +40,7 @@ def navsat_cb(msg):
     new_msg = TwistWithCovarianceStamped()
 
     new_msg.header = msg.header
-    new_msg.twist.twist.linear.x = -msg.twist.linear.y
-    new_msg.twist.twist.linear.y = msg.twist.linear.x
-    new_msg.twist.twist.linear.z = msg.twist.linear.z
+    new_msg.twist.twist = msg.twist
     new_msg.twist.covariance = covariance
 
     vel_pub.publish(new_msg)
