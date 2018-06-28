@@ -9,7 +9,7 @@
       <frameId>$(arg namespace)/navsat_link</frameId>
       <bodyName>$(arg namespace)/navsat_link</bodyName>
       <topicName>/$(arg namespace)/navsat/fix</topicName>
-      <velocityTopicName>/$(arg namespace)/navsat/vel</velocityTopicName>
+      <velocityTopicName>/$(arg namespace)/navsat/velocity</velocityTopicName>
       <referenceLatitude>49.9</referenceLatitude>
       <referenceLongitude>8.9</referenceLongitude>
       <referenceHeading>90</referenceHeading>
@@ -25,7 +25,7 @@
     <origin xyz="$(optenv HERON_NAVSAT_UBLOX_XYZ 0.015 0.050 0.072)"
               rpy="$(optenv HERON_NAVSAT_UBLOX_RPY 0.0 0.0 0.0)" />
   </joint>
-	
+
 
   <!-- IMU -->
   <gazebo>
