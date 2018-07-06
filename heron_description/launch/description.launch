@@ -4,9 +4,9 @@
   <arg name="config" default="base" />
 
   <!-- Vehicle's namespace -->
-  <arg name="namespace" default="/"/>
+  <arg name="namespace" default=""/>
 
-  <group ns="$(arg namespace)">
+  <group ns="/$(arg namespace)">
     <param name="robot_description"
            command="$(find heron_description)/scripts/env_run $(find heron_description)/urdf/configs/$(arg config)
                     $(find xacro)/xacro.py '$(find heron_description)/urdf/heron.urdf.xacro' --inorder debug:=$(arg hydro_debug) namespace:=$(arg namespace)" />
