@@ -29,6 +29,8 @@ from geometry_msgs.msg import TwistWithCovarianceStamped
 from sensor_msgs.msg import NavSatFix
 
 def navfix_cb(msg):
+    global covariance
+
     covariance[0] = msg.position_covariance[0]
     covariance[7] = msg.position_covariance[4]
     covariance[14] = msg.position_covariance[8]
