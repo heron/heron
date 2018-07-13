@@ -25,7 +25,7 @@
   <!-- Collision geometry mesh, usually in STL format (it is recommended to keep
   this geometry as simple as possible to improve the performance the physics engine
   regarding the computation of collision forces) -->
-  <xacro:property name="collision_mesh_file" value="file://$(find heron_description)/meshes/heron_base.stl"/>
+  <xacro:property name="collision_mesh_file" value="file://$(find heron_description)/meshes/heron_collision.stl"/>
 
   <material name="gray"><color rgba="0.7 0.7 0.7 1.0"/></material>
   <material name="dark_gray"><color rgba="0.2 0.2 0.2 1.0"/></material>
