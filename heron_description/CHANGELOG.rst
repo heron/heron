@@ -2,11 +2,6 @@
 Changelog for package heron_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-0.4.0 (2018-06-26)
-------------------
-* Reworked heron_description for use by uuv_simulator
-* Contributors: Guy Stoppi
-
 0.3.0 (2018-04-12)
 ------------------
 * Updated gps and imu default locations for next version of heron
