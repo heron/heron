@@ -11,7 +11,7 @@
   -->
 
   <xacro:macro name="rear_plate" params="type namespace">
-    <link name="${namespace}/rear_plate">
+    <link name="${namespace}rear_plate">
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
@@ -21,12 +21,12 @@
       </visual>
     </link>
     <joint name="rear_plate_joint" type="fixed">
-      <parent link="${namespace}/base_link" />
-      <child link="${namespace}/rear_plate" />
+      <parent link="${namespace}base_link" />
+      <child link="${namespace}rear_plate" />
       <origin xyz="-0.1915 0.0 0.001" />
     </joint>
 
-    <gazebo reference="${namespace}/rear_plate">
+    <gazebo reference="${namespace}rear_plate">
       <material>Gazebo/DarkGrey</material>
     </gazebo>
   </xacro:macro>
@@ -39,8 +39,8 @@
     <joint name="$(optenv HERON_NAVSAT_SMART6_MOUNT rear)_navsat_joint" type="fixed">
     <origin xyz="$(optenv HERON_NAVSAT_SMART6_OFFSET -0.25 0 0.08)"
             rpy="$(optenv HERON_NAVSAT_SMART6_RPY 0 0 0)" />
-      <parent link="$(arg namespace)/base_link" />
-      <child link="$(arg namespace)/$(optenv HERON_NAVSAT_SMART6_MOUNT rear)_navsat" />
+      <parent link="$(arg suffix_ns)base_link" />
+      <child link="$(arg suffix_ns)$(optenv HERON_NAVSAT_SMART6_MOUNT rear)_navsat" />
     </joint>
   </xacro:if>
 
@@ -56,8 +56,8 @@
     <joint name="$(optenv HERON_LASER_MOUNT front)_laser_mount_joint" type="fixed">
       <origin xyz="$(optenv HERON_LASER_OFFSET 0.0575 0 0.0115)"
               rpy="$(optenv HERON_LASER_RPY 0 0 0)" />
-      <parent link="$(arg namespace)/rear_plate" />
-      <child link="$(arg namespace)/$(optenv HERON_LASER_MOUNT front)_laser_mount" />
+      <parent link="$(arg suffix_ns)rear_plate" />
+      <child link="$(arg suffix_ns)$(optenv HERON_LASER_MOUNT front)_laser_mount" />
     </joint>
   </xacro:if>
 
@@ -69,23 +69,23 @@
     <joint name="$(optenv HERON_AXIS_PTZ_MOUNT axis_ptz)_camera_joint" type="fixed">
     <origin xyz="$(optenv HERON_AXIS_PTZ_OFFSET -0.124 0 0.078)"
             rpy="$(optenv HERON_AXIS_PTZ_RPY 0 0 0)" />
-      <parent link="$(arg namespace)/rear_plate" />
-      <child link="$(arg namespace)/$(optenv HERON_AXIS_PTZ_MOUNT axis_ptz)_camera_link" />
+      <parent link="$(arg suffix_ns)rear_plate" />
+      <child link="$(arg suffix_ns)$(optenv HERON_AXIS_PTZ_MOUNT axis_ptz)_camera_link" />
     </joint>
   </xacro:if>
 
   <xacro:if value="$(optenv HERON_SONAR 0)">
-    <link name="$(arg namespace)/sonar_$(optenv HERON_SONAR_MOUNT surface)" />
+    <link name="$(arg suffix_ns)sonar_$(optenv HERON_SONAR_MOUNT surface)" />
     <joint name="$(optenv HERON_SONAR_MOUNT rear)_sonar_joint" type="fixed">
     <origin xyz="$(optenv HERON_SONAR_OFFSET 0.0 0 -0.10)"
             rpy="$(optenv HERON_SONAR_RPY 0 0 0)" />
-      <parent link="$(arg namespace)/base_link" />
-      <child link="$(arg namespace)/sonar_$(optenv HERON_SONAR_MOUNT surface)" />
+      <parent link="$(arg suffix_ns)base_link" />
+      <child link="$(arg suffix_ns)sonar_$(optenv HERON_SONAR_MOUNT surface)" />
     </joint>
   </xacro:if>
 
   <xacro:unless value="$(optenv HERON_LASER 0)">
-    <rear_plate type="plain" namespace="$(arg namespace)" />
+    <rear_plate type="plain" namespace="$(arg suffix_ns)" />
   </xacro:unless>
 
 

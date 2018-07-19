@@ -5,11 +5,11 @@
   <gazebo>
     <plugin name="gps_controller" filename="libhector_gazebo_ros_gps.so">
       <updateRate>40</updateRate>
-      <robotNamespace>$(arg namespace)</robotNamespace>
-      <frameId>$(arg namespace)/navsat_link</frameId>
-      <bodyName>$(arg namespace)/navsat_link</bodyName>
-      <topicName>/$(arg namespace)/navsat/fix</topicName>
-      <velocityTopicName>/$(arg namespace)/navsat/velocity</velocityTopicName>
+      <robotNamespace>/$(arg namespace)</robotNamespace>
+      <frameId>$(arg suffix_ns)navsat_link</frameId>
+      <bodyName>$(arg suffix_ns)navsat_link</bodyName>
+      <topicName>/$(arg suffix_ns)navsat/fix</topicName>
+      <velocityTopicName>/$(arg suffix_ns)navsat/velocity</velocityTopicName>
       <referenceLatitude>49.9</referenceLatitude>
       <referenceLongitude>8.9</referenceLongitude>
       <referenceHeading>90</referenceHeading>
@@ -17,11 +17,11 @@
       <drift>0.0001 0.0001 0.0001</drift>
     </plugin>
   </gazebo>
-  <link name="$(arg namespace)/navsat_link" />
+  <link name="$(arg suffix_ns)navsat_link" />
 
   <joint name="navsat_joint" type="fixed">
-    <parent link="$(arg namespace)/base_link" />
-    <child link="$(arg namespace)/navsat_link" />
+    <parent link="$(arg suffix_ns)base_link" />
+    <child link="$(arg suffix_ns)navsat_link" />
     <origin xyz="$(optenv HERON_NAVSAT_UBLOX_XYZ 0.015 0.050 0.072)"
       rpy="$(optenv HERON_NAVSAT_UBLOX_RPY 0.0 0.0 0.0)" />
     </joint>
@@ -30,11 +30,11 @@
     <!-- IMU -->
     <gazebo>
       <plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
-        <robotNamespace>$(arg namespace)</robotNamespace>
+        <robotNamespace>/$(arg namespace)</robotNamespace>
         <updateRate>50.0</updateRate>
-        <bodyName>$(arg namespace)/imu_link</bodyName>
-        <frameId>$(arg namespace)/imu_link</frameId>
-        <topicName>/$(arg namespace)/imu/data_raw</topicName>
+        <bodyName>$(arg suffix_ns)imu_link</bodyName>
+        <frameId>$(arg suffix_ns)imu_link</frameId>
+        <topicName>/$(arg suffix_ns)imu/data_raw</topicName>
         <accelDrift>0.005 0.005 0.005</accelDrift>
         <accelGaussianNoise>0.005 0.005 0.005</accelGaussianNoise>
         <rateDrift>0.005 0.005 0.005 </rateDrift>
@@ -44,21 +44,21 @@
       </plugin>
     </gazebo>
 
-    <link name="$(arg namespace)/imu_link" />
-    <joint name="$(arg namespace)/imu_joint" type="fixed">
+    <link name="$(arg suffix_ns)imu_link" />
+    <joint name="$(arg suffix_ns)imu_joint" type="fixed">
       <origin xyz="$(optenv HERON_IMU_UM6_XYZ -0.1397 0.0 0)" rpy="$(optenv HERON_IMU_UM6_RPY 0 0.0 0.0)" />
-      <parent link="$(arg namespace)/base_link" />
-      <child link="$(arg namespace)/imu_link" />
+      <parent link="$(arg suffix_ns)base_link" />
+      <child link="$(arg suffix_ns)imu_link" />
     </joint>
 
     <!-- Magnetometer -->
     <gazebo>
       <plugin name="mag_controller" filename="libhector_gazebo_ros_magnetic.so">
         <updateRate>50</updateRate>
-        <robotNamespace>$(arg namespace)</robotNamespace>
-        <bodyName>$(arg namespace)/imu_link</bodyName>
-        <frameId>$(arg namespace)/imu_link</frameId>
-        <topicName>/$(arg namespace)/imu/mag</topicName>
+        <robotNamespace>/$(arg namespace)</robotNamespace>
+        <bodyName>$(arg suffix_ns)imu_link</bodyName>
+        <frameId>$(arg suffix_ns)imu_link</frameId>
+        <topicName>/$(arg suffix_ns)imu/mag</topicName>
         <referenceHeading>90</referenceHeading>
         <drift>0.0005 0.0005 0.0005</drift>
         <gaussianNoise>0.025 0.025 0.025</gaussianNoise>
@@ -69,9 +69,9 @@
     <gazebo>
       <plugin filename="libgazebo_ros_p3d.so" name="groundtruth_sim">
         <updateRate>20.0</updateRate>
-        <robotNamespace>$(arg namespace)</robotNamespace>
-        <bodyName>$(arg namespace)/base_link</bodyName>
-        <topicName>/$(arg namespace)/pose_gt</topicName>
+        <robotNamespace>/$(arg namespace)</robotNamespace>
+        <bodyName>$(arg suffix_ns)base_link</bodyName>
+        <topicName>/$(arg suffix_ns)pose_gt</topicName>
         <gaussianNoise>0.0</gaussianNoise>
         <frameName>world</frameName>
       </plugin>

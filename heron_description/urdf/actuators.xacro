@@ -10,12 +10,12 @@
 
 
     <!-- Right Thruster -->
-    <xacro:thruster_macro robot_namespace="$(arg namespace)" thruster_id="0">
+    <xacro:thruster_macro robot_namespace="$(arg namespace)" suffix_ns="$(arg suffix_ns)" thruster_id="0">
         <origin xyz="-0.53 -0.377654 -0.16" rpy="0 0 0" />
     </xacro:thruster_macro>
 
     <!-- Left Thruster -->
-    <xacro:thruster_macro robot_namespace="$(arg namespace)" thruster_id="1">
+    <xacro:thruster_macro robot_namespace="$(arg namespace)" suffix_ns="$(arg suffix_ns)" thruster_id="1">
         <origin xyz="-0.53 0.377654 -0.16" rpy="0 0 0" />
     </xacro:thruster_macro>
 

@@ -27,14 +27,15 @@ This program contains the description of the robot base model for the Clearpath 
 
 <robot name="heron" xmlns:xacro="http://www.ros.org/wiki/xacro" >
   <xacro:arg name="debug" default="0"/>
-  <xacro:arg name="namespace" default="/"/>
+  <xacro:arg name="namespace" default=""/>
+  <xacro:arg name="suffix_ns" default="$(arg namespace)"/>
 
   <!-- Include the ROV macro file -->
   <xacro:include filename="$(find heron_description)/urdf/base.xacro"/>
   <xacro:include filename="$(find heron_description)/urdf/gazebo.xacro"/>
 
   <!-- Create the heron -->
-  <xacro:heron_base namespace="$(arg namespace)">
+  <xacro:heron_base namespace="$(arg suffix_ns)">
     <!-- The underwater object plugin is given as an input block parameter to
      allow the addition of external models of manipulator units -->
     <gazebo>
@@ -43,7 +44,7 @@ This program contains the description of the robot base model for the Clearpath 
         <flow_velocity_topic>hydrodynamics/current_velocity</flow_velocity_topic>
         <debug>$(arg debug)</debug>
         <!-- Adding the hydrodynamic and hydrostatic parameters for the vehicle-->
-        <xacro:heron_hydro_model namespace="$(arg namespace)" />
+        <xacro:heron_hydro_model namespace="$(arg suffix_ns)" />
         <!--
           In case other modules are added to the vehicle (such as a manipulator)
           that also have link running with the underwater object plugin, they
@@ -60,7 +61,7 @@ This program contains the description of the robot base model for the Clearpath 
   <!-- Joint state publisher plugin -->
   <gazebo>
     <plugin name="joint_state_publisher" filename="libjoint_state_publisher.so">
-      <robotNamespace>$(arg namespace)</robotNamespace>
+      <robotNamespace>/$(arg namespace)</robotNamespace>
       <updateRate>10</updateRate>
     </plugin>
   </gazebo>

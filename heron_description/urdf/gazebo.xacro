@@ -15,7 +15,7 @@
     <xacro:macro name="heron_hydro_model" params="namespace">
 
       <!-- List of hydrodynamic models this robot's links -->
-      <link name="${namespace}/base_link">
+      <link name="${namespace}base_link">
               <volume>${heron_volume}</volume>
               <box>
                   <width>${heron_width}</width>

@@ -35,13 +35,13 @@
 
 
       <!-- location flips the panel. 1 is for the left and -1 is for the right -->
-      <joint name="${namespace}/base_${side}_joint" type="fixed">
+      <joint name="${namespace}base_${side}_joint" type="fixed">
         <origin xyz="0.0 ${location * 0.34495} 0.04959" rpy="0 0 0" />
-        <parent link="${namespace}/base_link" />
-        <child link="${namespace}/${side}_panel_link" />
+        <parent link="${namespace}base_link" />
+        <child link="${namespace}${side}_panel_link" />
       </joint>
 
-      <link name="${namespace}/${side}_panel_link">
+      <link name="${namespace}${side}_panel_link">
         <inertial>
           <mass value="0.1" />
           <origin xyz="0.00000000 0.00000000 0.00000000" />
@@ -58,7 +58,7 @@
         </visual>
       </link>
 
-      <gazebo reference="${namespace}/${side}_panel_link">
+      <gazebo reference="${namespace}${side}_panel_link">
         <material>Gazebo/Yellow</material>
       </gazebo>
     </xacro:macro>
@@ -68,7 +68,7 @@
 
 
       <!-- Rigid body description of the base link -->
-      <link name="${namespace}/base_link">
+      <link name="${namespace}base_link">
         <!--
           Be careful to setup the coefficients for the inertial tensor,
           otherwise your model will become unstable on Gazebo
@@ -91,7 +91,7 @@
       </link>
 
       <!-- Dummy Link to contain the inertial information for base_link -->
-      <link name="${namespace}/dummy_link">
+      <link name="${namespace}dummy_link">
         <inertial>
           <mass value="${mass}" />
           <origin xyz="${cog}" rpy="0 0 0"/>
@@ -104,11 +104,11 @@
       </link>
 
       <joint name="dummy_to_base" type="fixed">
-        <parent link="${namespace}/base_link" />
-        <child link="${namespace}/dummy_link" />
+        <parent link="${namespace}base_link" />
+        <child link="${namespace}dummy_link" />
       </joint>
 
-    <gazebo reference="${namespace}/base_link">
+    <gazebo reference="${namespace}base_link">
       <selfCollide>false</selfCollide>
       <material>Gazebo/DarkGrey</material>
       <gravity>1</gravity>
@@ -124,8 +124,8 @@
     <xacro:include filename="$(find heron_description)/urdf/sensors.xacro"/>
 
 
-    <xacro:panel namespace="$(arg namespace)" side="left" location="1" />
-    <xacro:panel namespace="$(arg namespace)" side="right" location="-1" />
+    <xacro:panel namespace="$(arg suffix_ns)" side="left" location="1" />
+    <xacro:panel namespace="$(arg suffix_ns)" side="right" location="-1" />
 
     <xacro:include filename="$(find heron_description)/urdf/accessories.urdf.xacro" />
 
