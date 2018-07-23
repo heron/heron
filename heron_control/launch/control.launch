@@ -10,6 +10,8 @@
   <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node" respawn="true" output="screen">
     <rosparam command="load" file="$(find heron_control)/config/navsat_config.yaml" />
     <remap from="/gps/fix" to="/navsat/fix" />
+    <rosparam param="datum" subst_value="True">[$(optenv GPS_DATUM 43.4720948, -80.5592608), 0.0]</rosparam>
+    <param name="wait_for_datum" value="$(eval optenv('GPS_DATUM') != '')" />
   </node>
 
 </launch>

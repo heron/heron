@@ -7,5 +7,3 @@ broadcast_utm_transform: true
 broadcast_utm_transform_as_parent_frame: true
 publish_filtered_gps: false
 use_odometry_yaw: false
-wait_for_datum: false
-#datum: [43.50076203, -80.54629721, 0.0]
