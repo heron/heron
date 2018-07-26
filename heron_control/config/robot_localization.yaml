@@ -3,7 +3,7 @@ odom_frame: odom
 base_link_frame: base_link
 world_frame: odom
 
-frequency: 50
+frequency: 20
 sensor_timeout: 0.1
 two_d_mode: true
 transform_time_offset: 0.0
@@ -40,7 +40,7 @@ odom0_differential: false
 odom0_relative: false
 
 
-# 							              x     y     z     r     p     y   x_dot  y_dot  z_dot  r_dot p_dot y_dot x_ddot y_ddot z_ddot
+# 	 	              x     y     z     r     p     y   x_dot  y_dot  z_dot  r_dot p_dot y_dot x_ddot y_ddot z_ddot
 process_noise_covariance: [  0.1,    0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,    0,    0,      0,
                              0,    0.1,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,    0,    0,      0,
                              0,    0,    0.06, 0,    0,    0,    0,     0,     0,     0,    0,    0,    0,    0,      0,
