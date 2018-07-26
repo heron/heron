@@ -1,10 +1,29 @@
 <launch>
+
+  <arg name="hydro_debug" default="0" />
   <arg name="config" default="base" />
 
-  <param name="robot_description"
-         command="$(find heron_description)/scripts/env_run
-                    $(find heron_description)/urdf/configs/$(arg config)
-                    $(find xacro)/xacro $(find heron_description)/urdf/heron.urdf.xacro
-                    --inorder " />
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  <!-- Vehicle's namespace -->
+  <arg name="namespace" default=""/>
+
+  <group ns="/$(arg namespace)">
+
+    <group if="$(eval namespace == '')">
+      <param name="robot_description"
+             command="$(find heron_description)/scripts/env_run $(find heron_description)/urdf/configs/$(arg config)
+                      $(find xacro)/xacro.py '$(find heron_description)/urdf/heron.urdf.xacro' --inorder debug:=$(arg hydro_debug)" />
+    </group>
+
+    <group unless="$(eval namespace == '')">
+      <param name="robot_description"
+             command="$(find heron_description)/scripts/env_run $(find heron_description)/urdf/configs/$(arg config)
+                      $(find xacro)/xacro.py '$(find heron_description)/urdf/heron.urdf.xacro' --inorder debug:=$(arg hydro_debug) namespace:=$(arg namespace) suffix_ns:=$(arg namespace)/" />
+    </group>
+
+    <!-- A joint state publisher plugin already is started with the model, no need to use the default joint state publisher -->
+
+    <!-- Publish robot model for ROS -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen" />
+  </group>
+
 </launch>

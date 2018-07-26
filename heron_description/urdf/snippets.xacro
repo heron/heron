@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- MACRO FOR THRUSTER UNITS  -->
+
+  <!-- Provide the propeller mesh in a separate file with the rotation axis
+  over propeller's frame X-axis in DAE (Collada) or STL format.
+  -->
+  <xacro:property name="prop_mesh_file" value="file://$(find heron_description)/meshes/prop.dae"/>
+
+  <!--
+    Thruster macro with integration of joint and link. The thrusters should
+    be initialized in the actuators.xacro file.
+  -->
+  <xacro:macro name="thruster_macro" params="robot_namespace suffix_ns thruster_id *origin">
+
+    <!--
+    Dummy link as place holder for the thruster frame,
+    since thrusters can often be inside the collision geometry
+    of the vehicle and may cause internal collisions if set otherwise
+    -->
+    <link name="${suffix_ns}thruster_${thruster_id}">
+
+      <visual>
+        <geometry>
+          <mesh filename="${prop_mesh_file}" scale="1 1 1" />
+        </geometry>
+      </visual>
+
+      <inertial>
+        <mass value="0.001" />
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="0.000000017" ixy="0.0" ixz="0.0"
+               iyy="0.000000017" iyz="0.0"
+               izz="0.000000017" />
+      </inertial>
+    </link>
+
+    <!-- Joint between thruster link and vehicle base link -->
+    <joint name="${suffix_ns}thruster_${thruster_id}_joint" type="continuous">
+      <xacro:insert_block name="origin" />
+      <axis xyz="1 0 0" />
+      <parent link="${suffix_ns}base_link" />
+      <child link="${suffix_ns}thruster_${thruster_id}" />
+    </joint>
+
+    <gazebo>
+      <!-- Thruster ROS plugin -->
+      <plugin name="${robot_namespace}thruster_${thruster_id}_thruster_model" filename="libthruster_ros_plugin.so">
+        <!-- Name of the thruster link -->
+        <linkName>${suffix_ns}thruster_${thruster_id}</linkName>
+
+        <!-- Name of the joint between thruster and vehicle base link -->
+        <jointName>${suffix_ns}thruster_${thruster_id}_joint</jointName>
+
+        <!-- Make the thruster aware of its id -->
+        <thrusterID>${thruster_id}</thrusterID>
+
+        <!-- Gain of the input command signal -->
+        <gain>1</gain>
+
+        <!-- Maximum allowed input value for the input signal for thruster unit -->
+        <clampMax>100</clampMax>
+
+        <!-- Minimum allowed value for the input signal for thruster unit -->
+        <clampMin>-100</clampMin>
+
+        <!-- Minimum and maximum thrust force output allowed -->
+        <thrustMin>-35</thrustMin>
+        <thrustMax>35</thrustMax>
+
+        <!--
+        Value from 0 to 1 to set the efficiency of the output thrust force
+        Default value is 1.0
+        -->
+        <thrust_efficiency>1</thrust_efficiency>
+
+        <!--
+        Value from 0 to 1 to set the efficiency of the propeller as a factor
+        to be multiplied to the current value of the state variable at each
+        iteration.
+        Default value is 1.0
+        -->
+        <propeller_efficiency>1</propeller_efficiency>
+
+
+        <!-- 2) First order model -->
+        <dynamics>
+          <type>FirstOrder</type>
+          <timeConstant>0.05</timeConstant>
+        </dynamics>
+
+        <!-- 3) Linear interpolation
+        If you have access to the thruster's data sheet, for example,
+        you can enter samples of the curve's input and output values
+        and the thruster output will be found through linear interpolation
+        of the given samples.
+        -->
+        <conversion>
+          <type>LinearInterp</type>
+          <inputValues>-1.0 -0.8 -0.6 -0.4 -0.2 0 0.2 0.4 0.6 0.8 1.0</inputValues>
+          <outputValues>-19.88 -16.52 -12.6 -5.6 -1.4 0.0 2.24 9.52 21.28 28.0 33.6</outputValues>
+        </conversion>
+
+      </plugin>
+    </gazebo>
+
+    <gazebo reference="${suffix_ns}thruster_${thruster_id}">
+      <selfCollide>false</selfCollide>
+    </gazebo>
+  </xacro:macro>
+
+
+
+</robot>

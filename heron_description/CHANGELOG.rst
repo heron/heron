@@ -2,7 +2,6 @@
 Changelog for package heron_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-
 0.3.0 (2018-04-12)
 ------------------
 * Updated gps and imu default locations for next version of heron

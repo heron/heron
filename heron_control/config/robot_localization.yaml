@@ -13,7 +13,7 @@ use_control: false
 # -------------------------------------
 # External IMU:
 # -------------------------------------
-imu0: /imu/data
+imu0: imu/data
 imu0_config: [false, false, false,
               false, false, true,
               false, false, false,
@@ -28,7 +28,7 @@ imu0_remove_gravitational_acceleration: true
 # -------------------------------------
 # GPS Odometry (From Navsat transform):
 # -------------------------------------
-odom0: /odometry/gps
+odom0: odometry/gps
 odom0_config: [true,  true,  false,
                false, false, false,
                false, false, false,
@@ -39,6 +39,19 @@ odom0_nodelay: true
 odom0_differential: false
 odom0_relative: false
 
+# -------------------------------------
+# GPS Velocity:
+# -------------------------------------
+twist0: navsat/vel_cov
+twist0_config: [false,  false,  false,
+               false, false, false,
+               true, true, false,
+               false, false, false,
+               false, false, false]
+twist0_queue_size: 10
+twist0_nodelay: true
+twist0_differential: false
+twist0_relative: false
 
 # 	 	              x     y     z     r     p     y   x_dot  y_dot  z_dot  r_dot p_dot y_dot x_ddot y_ddot z_ddot
 process_noise_covariance: [  0.1,    0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,    0,    0,      0,
@@ -47,8 +60,8 @@ process_noise_covariance: [  0.1,    0,    0,    0,    0,    0,    0,     0,    
                              0,    0,    0,    0.03, 0,    0,    0,     0,     0,     0,    0,    0,    0,    0,      0,
                              0,    0,    0,    0,    0.03, 0,    0,     0,     0,     0,    0,    0,    0,    0,      0,
                              0,    0,    0,    0,    0,    0.1,  0,     0,     0,     0,    0,    0,    0,    0,      0,
-                             0,    0,    0,    0,    0,    0,    0.025, 0,     0,     0,    0,    0,    0,    0,      0,
-                             0,    0,    0,    0,    0,    0,    0,     0.025, 0,     0,    0,    0,    0,    0,      0,
+                             0,    0,    0,    0,    0,    0,    0.25,  0,     0,     0,    0,    0,    0,    0,      0,
+                             0,    0,    0,    0,    0,    0,    0,     0.25,  0,     0,    0,    0,    0,    0,      0,
                              0,    0,    0,    0,    0,    0,    0,     0,     0.04,  0,    0,    0,    0,    0,      0,
                              0,    0,    0,    0,    0,    0,    0,     0,     0,     0.01, 0,    0,    0,    0,      0,
                              0,    0,    0,    0,    0,    0,    0,     0,     0,     0,    0.01, 0,    0,    0,      0,
