@@ -53,7 +53,6 @@ twist0_nodelay: true
 twist0_differential: false
 twist0_relative: false
 
-
 # 	 	              x     y     z     r     p     y   x_dot  y_dot  z_dot  r_dot p_dot y_dot x_ddot y_ddot z_ddot
 process_noise_covariance: [  0.1,    0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,    0,    0,      0,
                              0,    0.1,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,    0,    0,      0,
