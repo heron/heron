@@ -46,7 +46,7 @@
 
     <gazebo>
       <!-- Thruster ROS plugin -->
-      <plugin name="${robot_namespace}thruster_${thruster_id}_thruster_model" filename="libthruster_ros_plugin.so">
+      <plugin name="${robot_namespace}thruster_${thruster_id}_thruster_model" filename="libuuv_thruster_ros_plugin.so">
         <!-- Name of the thruster link -->
         <linkName>${suffix_ns}thruster_${thruster_id}</linkName>
 
