@@ -2,6 +2,34 @@
 Changelog for package heron_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* changed plugin names in xacro files. (`#7 <https://github.com/heron/heron/issues/7>`_)
+* Uploaded propeller.dae
+  * Put in some missing dependencies and upgraded package.xml to format 2.0
+  * Uploaded propeller model
+* Put in some missing dependencies and upgraded package.xml to format 2.0 (`#5 <https://github.com/heron/heron/issues/5>`_)
+* Fixed Heron accessories glitch with custom namespaces
+* Merge pull request `#2 <https://github.com/heron/heron/issues/2>`_ from Nirzvi1/kinetic-devel
+  Added heron_control, changed heron_description to use with uuv_simulator
+* Removed heron_msgs dependency and added roslaunch back
+* Fixing namespaces to allow for empty namespace
+* Added simpler collision mesh
+* Fixed spacing using Atom auto-indent
+* Undoing package number changes
+* Further implementing namespaces
+* Renamed navsat/vel topic to allow Vec3->Twist translation
+* Added envvars to change sensor locations and attached GPS info to separate sensor frame
+* Made changes to allow the actual Heron robot to use heron_description
+* Removed uuv_msgs dependencies (not actually needed)
+* Changed simulated GPS topic to match the actual topic
+* Additional updates so Gazebo sensor plugins would work with namespaces
+* Re-added copyright notice in heron.urdf.xacro
+* Switched UUV Sensor plugins to Gazebo plugins
+* Updated version in package.xml
+* Initial commit of new heron_description files
+* Contributors: Guy Stoppi, Shreya Subramaniam, Tony Baltovski
+
 0.3.0 (2018-04-12)
 ------------------
 * Updated gps and imu default locations for next version of heron

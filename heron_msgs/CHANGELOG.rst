@@ -2,6 +2,13 @@
 Changelog for package heron_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Put in some missing dependencies and upgraded package.xml to format 2.0 (`#5 <https://github.com/heron/heron/issues/5>`_)
+* Added heron_control, changed heron_description to use with uuv_simulator
+* Initial commit of new heron_description files
+* Contributors: Guy Stoppi, Tony Baltovski
+
 0.3.0 (2018-04-12)
 ------------------
 0.2.3 (2018-04-12)
