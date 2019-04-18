@@ -2,8 +2,8 @@
 Changelog for package heron_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.3.1 (2019-04-18)
+------------------
 * changed plugin names in xacro files. (`#7 <https://github.com/heron/heron/issues/7>`_)
 * Uploaded propeller.dae
   * Put in some missing dependencies and upgraded package.xml to format 2.0
