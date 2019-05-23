@@ -2,12 +2,6 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <!-- MACRO FOR THRUSTER UNITS  -->
-
-  <!-- Provide the propeller mesh in a separate file with the rotation axis
-  over propeller's frame X-axis in DAE (Collada) or STL format.
-  -->
-  <xacro:property name="prop_mesh_file" value="file://$(find heron_description)/meshes/prop.dae"/>
-
   <!--
     Thruster macro with integration of joint and link. The thrusters should
     be initialized in the actuators.xacro file.
@@ -23,7 +17,7 @@
 
       <visual>
         <geometry>
-          <mesh filename="${prop_mesh_file}" scale="1 1 1" />
+          <mesh filename="package://heron_description/meshes/prop.dae" scale="1 1 1" />
         </geometry>
       </visual>
 
