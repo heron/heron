@@ -13,20 +13,6 @@
   <!-- Loading vehicle's specific macros -->
   <xacro:include filename="$(find heron_description)/urdf/snippets.xacro"/>
 
-
-  <!--
-    Visual mesh file for the vehicle, usually in DAE (Collada) format. Be sure to store the
-    mesh with the origin of the mesh on the same position of the center of mass, otherwise
-    the mesh pose will have to be corrected below in the <visual> block.
-    Open the meshes for the RexROV vehicle in Blender to see an example on the mesh placement.
-  -->
-  <xacro:property name="visual_mesh_file" value="file://$(find heron_description)/meshes/heron_base.stl"/>
-
-  <!-- Collision geometry mesh, usually in STL format (it is recommended to keep
-  this geometry as simple as possible to improve the performance the physics engine
-  regarding the computation of collision forces) -->
-  <xacro:property name="collision_mesh_file" value="file://$(find heron_description)/meshes/heron_collision.stl"/>
-
   <material name="gray"><color rgba="0.7 0.7 0.7 1.0"/></material>
   <material name="dark_gray"><color rgba="0.2 0.2 0.2 1.0"/></material>
   <material name="yellow"><color rgba="0.8 0.8 0.0 1.0"/></material>
@@ -52,7 +38,7 @@
         <visual>
           <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
-            <mesh filename="file://$(find heron_description)/meshes/${side}_panel.stl" />
+            <mesh filename="package://heron_description/meshes/${side}_panel.stl" />
           </geometry>
           <material name="yellow" />
         </visual>
@@ -77,7 +63,7 @@
         <visual>
           <origin xyz="0 0 0" rpy="0 0 0"/>
           <geometry>
-            <mesh filename="${visual_mesh_file}" scale="1 1 1" />
+            <mesh filename="package://heron_description/meshes/heron_base.stl" scale="1 1 1" />
           </geometry>
           <material name="dark_gray" />
         </visual>
@@ -85,7 +71,7 @@
         <collision>
           <origin xyz="0 0 0" rpy="0 0 0"/>
           <geometry>
-            <mesh filename="${collision_mesh_file}" scale="1 1 1" />
+            <mesh filename="package://heron_description/meshes/heron_collision.stl" scale="1 1 1" />
           </geometry>
         </collision>
       </link>
