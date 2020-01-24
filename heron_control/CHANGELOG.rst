@@ -2,6 +2,11 @@
 Changelog for package heron_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* [heron_control] Fixing missing dep and minor clean-up.
+* Contributors: Tony Baltovski
+
 0.3.1 (2019-04-18)
 ------------------
 * Put in some missing dependencies and upgraded package.xml to format 2.0 (`#5 <https://github.com/heron/heron/issues/5>`_)
