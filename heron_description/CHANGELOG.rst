@@ -2,8 +2,8 @@
 Changelog for package heron_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.3.2 (2020-01-24)
+------------------
 * Changed mesh declarations to use packages instead of xacro finds (`#8 <https://github.com/heron/heron/issues/8>`_)
 * Contributors: Dave Niewinski
 

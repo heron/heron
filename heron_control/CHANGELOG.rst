@@ -2,8 +2,8 @@
 Changelog for package heron_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.3.2 (2020-01-24)
+------------------
 * [heron_control] Fixing missing dep and minor clean-up.
 * Contributors: Tony Baltovski
 
