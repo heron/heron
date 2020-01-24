@@ -9,7 +9,7 @@
     <rosparam param="datum" subst_value="True">[$(optenv GPS_DATUM 43.4720948, -80.5592608), 0.0]</rosparam>
     <param name="wait_for_datum" value="$(eval optenv('GPS_DATUM') != '')" />
   </node>
-  
-  <node pkg="heron_control" type="vel_cov.py" name="navsat_vel_cov" />
+
+  <node pkg="heron_control" type="vel_cov" name="navsat_vel_cov" />
 
 </launch>
