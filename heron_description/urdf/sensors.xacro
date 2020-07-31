@@ -58,7 +58,7 @@
         <robotNamespace>/$(arg namespace)</robotNamespace>
         <bodyName>$(arg suffix_ns)imu_link</bodyName>
         <frameId>$(arg suffix_ns)imu_link</frameId>
-        <topicName>/$(arg suffix_ns)imu/mag</topicName>
+        <topicName>/$(arg suffix_ns)imu/mag_raw</topicName>
         <referenceHeading>90</referenceHeading>
         <drift>0.0005 0.0005 0.0005</drift>
         <gaussianNoise>0.025 0.025 0.025</gaussianNoise>
