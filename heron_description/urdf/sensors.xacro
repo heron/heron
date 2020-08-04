@@ -62,6 +62,7 @@
         <referenceHeading>90</referenceHeading>
         <drift>0.0005 0.0005 0.0005</drift>
         <gaussianNoise>0.025 0.025 0.025</gaussianNoise>
+        <useMagneticFieldMsgs>false</useMagneticFieldMsgs>
       </plugin>
     </gazebo>
 
