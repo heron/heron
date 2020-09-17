@@ -2,6 +2,12 @@
 Changelog for package heron_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Update ROS deps to remove/rename third-party packages that are not available on Melodic
+* Related to https://github.com/heron/heron_simulator/pull/6.  Change the topic that the mag data is published to so we can translate it to the new message standard to work-around a bug with the imu filter.
+* Contributors: Chris Iverach-Brereton
+
 0.3.2 (2020-01-24)
 ------------------
 * Changed mesh declarations to use packages instead of xacro finds (`#8 <https://github.com/heron/heron/issues/8>`_)
