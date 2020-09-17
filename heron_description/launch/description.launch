@@ -11,13 +11,13 @@
     <group if="$(eval namespace == '')">
       <param name="robot_description"
              command="$(find heron_description)/scripts/env_run $(find heron_description)/urdf/configs/$(arg config)
-                      $(find xacro)/xacro.py '$(find heron_description)/urdf/heron.urdf.xacro' --inorder debug:=$(arg hydro_debug)" />
+                      $(find xacro)/xacro '$(find heron_description)/urdf/heron.urdf.xacro' --inorder debug:=$(arg hydro_debug)" />
     </group>
 
     <group unless="$(eval namespace == '')">
       <param name="robot_description"
              command="$(find heron_description)/scripts/env_run $(find heron_description)/urdf/configs/$(arg config)
-                      $(find xacro)/xacro.py '$(find heron_description)/urdf/heron.urdf.xacro' --inorder debug:=$(arg hydro_debug) namespace:=$(arg namespace) suffix_ns:=$(arg namespace)/" />
+                      $(find xacro)/xacro '$(find heron_description)/urdf/heron.urdf.xacro' --inorder debug:=$(arg hydro_debug) namespace:=$(arg namespace) suffix_ns:=$(arg namespace)/" />
     </group>
 
     <!-- A joint state publisher plugin already is started with the model, no need to use the default joint state publisher -->
