@@ -51,7 +51,7 @@
                        topic="$(optenv HERON_LASER_TOPIC front/scan)"
                        suffix_ns="$(arg suffix_ns)"/>
 
-    <rear_plate type="lidar" suffix_ns="$(arg suffix_ns)" />
+    <xacro:rear_plate type="lidar" suffix_ns="$(arg suffix_ns)" />
 
     <joint name="$(optenv HERON_LASER_MOUNT front)_laser_mount_joint" type="fixed">
       <origin xyz="$(optenv HERON_LASER_OFFSET 0.0575 0 0.0115)"
@@ -85,7 +85,7 @@
   </xacro:if>
 
   <xacro:unless value="$(optenv HERON_LASER 0)">
-    <rear_plate type="plain" suffix_ns="$(arg suffix_ns)" />
+    <xacro:rear_plate type="plain" suffix_ns="$(arg suffix_ns)" />
   </xacro:unless>
 
 
