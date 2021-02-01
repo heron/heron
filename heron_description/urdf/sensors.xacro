@@ -46,7 +46,7 @@
 
     <link name="$(arg suffix_ns)imu_link" />
     <joint name="$(arg suffix_ns)imu_joint" type="fixed">
-      <origin xyz="$(optenv HERON_IMU_UM6_XYZ -0.1397 0.0 0)" rpy="$(optenv HERON_IMU_UM6_RPY 0 0.0 0.0)" />
+      <origin xyz="$(optenv HERON_IMU_XYZ -0.1397 0.0 0)" rpy="$(optenv HERON_IMU_RPY 0 0.0 0.0)" />
       <parent link="$(arg suffix_ns)base_link" />
       <child link="$(arg suffix_ns)imu_link" />
     </joint>
