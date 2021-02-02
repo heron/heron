@@ -12,14 +12,14 @@
     <group if="$(eval namespace == '')">
       <param name="robot_description"
              command="$(find heron_description)/scripts/env_run $(find heron_description)/urdf/configs/$(arg config)
-                      $(find xacro)/xacro.py '$(find heron_description)/urdf/heron.urdf.xacro'
+                      $(find xacro)/xacro '$(find heron_description)/urdf/heron.urdf.xacro'
                       debug:=$(arg hydro_debug) simulation:=$(arg simulation)" />
     </group>
 
     <group unless="$(eval namespace == '')">
       <param name="robot_description"
              command="$(find heron_description)/scripts/env_run $(find heron_description)/urdf/configs/$(arg config)
-                      $(find xacro)/xacro.py '$(find heron_description)/urdf/heron.urdf.xacro'
+                      $(find xacro)/xacro '$(find heron_description)/urdf/heron.urdf.xacro'
                       debug:=$(arg hydro_debug) simulation:=$(arg simulation)
                       namespace:=$(arg namespace) suffix_ns:=$(arg namespace)/" />
     </group>
