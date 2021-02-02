@@ -104,7 +104,16 @@
     <xacro:insert_block name="gazebo"/>
 
     <!-- Include the thruster modules -->
-    <xacro:include filename="$(find heron_description)/urdf/actuators.xacro"/>
+    <xacro:thruster_macro robot_namespace="$(arg namespace)" suffix_ns="$(arg suffix_ns)" thruster_id="0"
+      simulation="$(arg simulation)">
+      <!-- Right Thruster -->
+      <origin xyz="-0.53 -0.377654 -0.16" rpy="0 0 0" />
+    </xacro:thruster_macro>
+    <xacro:thruster_macro robot_namespace="$(arg namespace)" suffix_ns="$(arg suffix_ns)" thruster_id="1"
+      simulation="$(arg simulation)">
+      <!-- Left Thruster -->
+      <origin xyz="-0.53 0.377654 -0.16" rpy="0 0 0" />
+    </xacro:thruster_macro>s
 
     <!-- Include the sensor modules -->
     <xacro:include filename="$(find heron_description)/urdf/sensors.xacro"/>
