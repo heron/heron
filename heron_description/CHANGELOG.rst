@@ -2,8 +2,8 @@
 Changelog for package heron_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.3.4 (2021-02-12)
+------------------
 * Fix disconnected thruster joints (`#12 <https://github.com/heron/heron/issues/12>`_)
   * Use a fixed joint for the thrusters unless we're in simulation; these joints are purely decorative outside gazebo, and the tf is not published except in simulation anyway
   * Remove superfluous .py; they were a copy & paste error

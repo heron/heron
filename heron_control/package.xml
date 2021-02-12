@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>heron_control</name>
-  <version>0.3.3</version>
+  <version>0.3.4</version>
   <description>Control package for Heron</description>
 
   <maintainer email="mpurvis@clearpathrobotics.com">Mike Purvis</maintainer>
