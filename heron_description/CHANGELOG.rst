@@ -2,6 +2,19 @@
 Changelog for package heron_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fix disconnected thruster joints (`#12 <https://github.com/heron/heron/issues/12>`_)
+  * Use a fixed joint for the thrusters unless we're in simulation; these joints are purely decorative outside gazebo, and the tf is not published except in simulation anyway
+  * Remove superfluous .py; they were a copy & paste error
+* Merge pull request `#11 <https://github.com/heron/heron/issues/11>`_ from heron/no-um6
+  Rename UM6 env vars to be generic IMU
+* Rename the UM6 IMU env vars to remove the reference to UM6; make them generic IMU vars instead
+* [heron_description] Dropped --in-order arg from xacro since it is default in Melodic.
+* [heron_description] Added xacro xml namespace prefix.
+* [heron_description] Dropped .py on xacro since it is deprecated.
+* Contributors: Chris Iverach-Brereton, Tony Baltovski
+
 0.3.3 (2020-09-17)
 ------------------
 * Update ROS deps to remove/rename third-party packages that are not available on Melodic
