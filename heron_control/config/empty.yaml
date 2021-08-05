@@ -1,0 +1,8 @@
+# The empty Heron extras configuration has nothing in it and should not.
+# It is meant to override the default to add custom control parameters
+# file in your own Heron customization package and setting HERON_CONFIG_EXTRAS
+# to your customization file in the launch file control.launch.
+# Each parameter will need to be loaded in the correct namespace to
+# be used. For example, for a Heron with a modified EKF configuration
+# This can be used to change ekf_localization_node/odom0 and odom0_config
+# parameters to use a different IMU
