@@ -1,4 +1,7 @@
 <launch>
+  <arg name="config_extras"
+       default="$(eval optenv('HERON_CONFIG_EXTRAS', find('heron_control') + '/config/empty.yaml'))"/>
+
    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization_node">
     <rosparam command="load" file="$(find heron_control)/config/robot_localization.yaml" />
   </node>
@@ -11,5 +14,8 @@
   </node>
 
   <node pkg="heron_control" type="vel_cov" name="navsat_vel_cov" />
+
+  <!-- Override the default control parameters, see config/empty.yaml for default. -->
+  <rosparam command="load" file="$(arg config_extras)" />
 
 </launch>
