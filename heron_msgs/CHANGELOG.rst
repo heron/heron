@@ -2,6 +2,9 @@
 Changelog for package heron_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.3.5 (2022-02-23)
 ------------------
 * Squashed commit of the following:

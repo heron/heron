@@ -2,6 +2,9 @@
 Changelog for package heron_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.3.5 (2022-02-23)
 ------------------
 * Apply the modified EKF configuration to fix the odom frame drifting (`#17 <https://github.com/heron/heron/issues/17>`_)
