@@ -16,7 +16,7 @@ use_control: false
 imu0: imu/data
 imu0_config: [false, false, false,
               false, false, false,
-              false, false, true,
+              false, false, false,
               true, true, true,
               false, false, false]
 imu0_nodelay: true
