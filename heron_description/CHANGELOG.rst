@@ -2,8 +2,8 @@
 Changelog for package heron_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.3.5 (2022-02-23)
+------------------
 * Squashed commit of the following:
   commit 51454398314997a7bb04571e8e73d3072ccc618d
   Author: Chris Iverach-Brereton <civerachb@clearpathrobotics.com>
