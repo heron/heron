@@ -3,6 +3,10 @@
 
   <!-- GPS -->
   <gazebo>
+    <xacro:property name="datum_env" value="$(optenv GPS_DATUM '49.9, 8.9')"/>
+    <xacro:property name="datum" value="${map(float, datum_env.split(','))}" />
+    <xacro:property name="datum_lat" value="${datum[0]}" />
+    <xacro:property name="datum_lon" value="${datum[1]}" />
     <plugin name="gps_controller" filename="libhector_gazebo_ros_gps.so">
       <updateRate>40</updateRate>
       <robotNamespace>/$(arg namespace)</robotNamespace>
@@ -10,8 +14,8 @@
       <bodyName>$(arg suffix_ns)navsat_link</bodyName>
       <topicName>/$(arg suffix_ns)navsat/fix</topicName>
       <velocityTopicName>/$(arg suffix_ns)navsat/velocity</velocityTopicName>
-      <referenceLatitude>49.9</referenceLatitude>
-      <referenceLongitude>8.9</referenceLongitude>
+      <referenceLatitude>${datum_lat}</referenceLatitude>
+      <referenceLongitude>${datum_lon}</referenceLongitude>
       <referenceHeading>90</referenceHeading>
       <referenceAltitude>0</referenceAltitude>
       <drift>0.0001 0.0001 0.0001</drift>
