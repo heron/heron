@@ -4,7 +4,7 @@
   <!-- GPS -->
   <gazebo>
     <xacro:property name="datum_env" value="$(optenv GPS_DATUM '49.9, 8.9')"/>
-    <xacro:property name="datum" value="${map(float, datum_env.split(','))}" />
+    <xacro:property name="datum" value="${list(map(float, datum_env.split(',')))}" />
     <xacro:property name="datum_lat" value="${datum[0]}" />
     <xacro:property name="datum_lon" value="${datum[1]}" />
     <plugin name="gps_controller" filename="libhector_gazebo_ros_gps.so">
